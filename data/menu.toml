@@ -1,0 +1,29 @@
+[[entries]]
+title = "intro"
+
+  [[entries.entries]]
+  title = "this site is the yaps and thoughts of Alex Ma 天一 (Pinyin: Tiānyī Mǎ)."
+
+  [[entries.entries]]
+  title = "sometimes the posts only have a title"
+
+  [[entries.entries]]
+  title = "i kept some of the template creator's posts"
+
+  [[entries.entries]]
+  title = "github repo"
+  url = "https://github.com/alexxsanio"
+
+  [[entries.entries]]
+  title = "too dramatic"
+  url = "posts/too-dramatic"
+
+
+[[entries]]
+title = "threads"
+
+  [entries.post_list]
+  limit = 20
+  show_more = true
+  show_more_text = "See archive..."
+  show_more_url = "posts"
