@@ -1,7 +1,7 @@
 ---
 title: "best quotes of from my favorite BL novel (updating ✨)"
 date: 2025-11-17T3:01:00+00:00
-draft: true
+draft: false
 ---
 
 /

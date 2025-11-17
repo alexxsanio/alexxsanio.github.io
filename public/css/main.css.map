@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "main.css",
-	"sourceRoot": "/Users/alextianyima/Documents/alexxsanio/my-site",
+	"sourceRoot": "/Users/alextianyima/Documents/GitHub/alexxsanio.github.io",
 	"sources": [
 		"assets/css/main.scss"
 	],
