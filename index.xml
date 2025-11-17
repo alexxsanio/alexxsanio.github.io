@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>//localhost:1313/</link>
+    <description>Recent content on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 17 Nov 2025 03:33:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>too dramatic</title>
+      <link>//localhost:1313/posts/too-dramatic/</link>
+      <pubDate>Mon, 17 Nov 2025 03:33:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/too-dramatic/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;//localhost:1313/images/too-dramatic.png&#34; alt=&#34;too-dramatic&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>i deleted my previous github acc but i still have the codes of the 20 old projects locally</title>
+      <link>//localhost:1313/posts/old-github/</link>
+      <pubDate>Mon, 17 Nov 2025 03:22:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/old-github/</guid>
+      <description>&lt;h2 id=&#34;therapy&#34;&gt;therapy&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;//localhost:1313/images/therapy.png&#34; alt=&#34;therapy&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>best quotes of from my favorite BL novel (updating ✨)</title>
+      <link>//localhost:1313/posts/best-quote/</link>
+      <pubDate>Mon, 17 Nov 2025 03:01:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/best-quote/</guid>
+      <description>&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;&amp;rdquo; said Feng Xin.&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;&amp;rdquo; said Mu Qing.&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;?&amp;rdquo; said Quan Yizhen.&lt;br&gt;&#xA;&amp;ldquo;Ho ho,&amp;rdquo; said Pei Ming.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;&#xA;&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“Xie Lian didn&amp;rsquo;t know whether to laugh or cry.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;&#xA;&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“If I like you, you could be a beggar and I&amp;rsquo;d still like you. If I dislike you, you could be the emperor and I&amp;rsquo;d still dislike you. Shouldn&amp;rsquo;t it be like that? It&amp;rsquo;s simple logic, so whether you&amp;rsquo;re human or not is irrelevant.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>strange post with custom js</title>
+      <link>//localhost:1313/posts/2020-07-06-strange-post/</link>
+      <pubDate>Mon, 06 Jul 2020 00:00:00 +0800</pubDate>
+      <guid>//localhost:1313/posts/2020-07-06-strange-post/</guid>
+      <description>&lt;p&gt;This post is strange. It also has some custom js.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/hanwenguo/hugo-theme-nostyleplease&#34;&gt;Masellum Author Of The Template&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
