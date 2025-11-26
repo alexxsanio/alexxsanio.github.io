@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="Why a review of backend engineering?
+Like many people, I&rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased. Jobs like ML or AI engineer especially would require many years of experience. From stories I&rsquo;ve heard, it seems like there&rsquo;re only two ways to actually get a decent-paying job in a good company: either you get an internship which then leads to a job, or you get an ML-adjacent job and hop to an ML job in the same company.">  
+
+  <title>
+    
+      📝 A Review Of Backend Engineer Jobs, Part. I
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.51652302d3a998bf7887aed5c2cf89141bbebdf45a2c8f87b0717a3cf4f51c4e53c694c328fb1de78c3a625a1c01f80745bf1f2f42c040647a245cbbb6c2d1d7.css" integrity="sha512-UWUjAtOpmL94h67Vws&#43;JFBu&#43;vfRaLI&#43;HsHF6PPT1HE5TxpTDKPsd54w6YlocAfgHRb8fL0LAQGR6JFy7tsLR1w==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">..</a>
+
+                    <p>
+                        <time datetime="2025-11-25 07:00:00 &#43;0800 &#43;0800">
+                            2025-11-25
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>📝 A Review Of Backend Engineer Jobs, Part. I</h1>
+
+    
+
+    <h2 id="why-a-review-of-backend-engineering">Why a review of backend engineering?</h2>
+<p>Like many people, I&rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased. Jobs like ML or AI engineer especially would require many years of experience. From stories I&rsquo;ve heard, it seems like there&rsquo;re only two ways to actually get a decent-paying job in a good company: either you get an internship which then leads to a job, or you get an ML-adjacent job and hop to an ML job in the same company.</p>
+<p>Software engineering could have any job function, mostly are either frontend, backend, full-stack or more data-intensive. To me personally, backend engineering is much more interesting because it feels more algorithmic and would touch on challenging and interesting problems like software architecturing and database management. In comparison, frontend coding is usually messy and relatively straightforward (don&rsquo;t hit me on this&hellip;I know some frontend engineering could be very intelligent, but this is just my personal experience).</p>
+<h2 id="intro-to-this-series">Intro to this series</h2>
+<p>This notebook uses <a href="https://github.com/speedyapply/JobSpy">a pre-existing tool</a> to scrape the most recent backend engineering jobs from areas adjacent to major cities across the US, covering as much state as possible. The choice of cities is somewhat arbitrary. It has 3060 jobs from the past months, each job has the following attributes:</p>
+<ul>
+<li>title</li>
+<li>location</li>
+<li>area</li>
+<li>company</li>
+<li>date posted</li>
+<li>job type</li>
+<li>is remote</li>
+<li>job level</li>
+<li>job function</li>
+<li>description</li>
+</ul>
+<p>The city and state name used to search for jobs is added as the <code>area</code> of jobs. It could be different from the exact location of the job.</p>
+<p><strong>Notes 0.1</strong>: the scrapper is pre-built so I don&rsquo;t know how it decides which job to keep.<br>
+<strong>Notes 0.2</strong>: the appendix at the end of the notebook have a list of cities covered in the dataset and the data aggregation pipeline.<br>
+<strong>Notes 0.3</strong>: all data are available on Kaggle: <a href="https://www.kaggle.com/datasets/tianyimasf/backend-engineer-jobs-us/data"><strong>view and download</strong></a></p>
+<h2 id="-exploratory-data-analysis">🔍 Exploratory Data Analysis</h2>
+<p>For this analysis, I only scraped jobs from LinkedIn. Indeed is weird to use and Google Job&rsquo;s data is usually dirty, and the jobs postings have a lot of overlaps anyways.</p>
+<p>From a first glance, we can see that there&rsquo;re a lot of null values in a lot of the fields. But if you look at the field names closely, most of the fields are not that important anyways. It&rsquo;s good to know them if exists, but not necessary to get a snapshot of what kind of backend engineering jobs are out there and what they require.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>jobs = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;jobs.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>jobs.info()
+</span></span></code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3060 entries, 0 to 3059
+Data columns (total 35 columns):
+ #   Column                 Non-Null Count  Dtype  
+---  ------                 --------------  -----  
+ 0   id                     3060 non-null   object 
+ 1   site                   3060 non-null   object 
+ 2   job_url                3060 non-null   object 
+ 3   job_url_direct         898 non-null    object 
+ 4   title                  3060 non-null   object 
+ 5   company                3060 non-null   object 
+ 6   location               2903 non-null   object 
+ 7   area                   3060 non-null   object 
+ 8   date_posted            2607 non-null   object 
+ 9   job_type               3060 non-null   object 
+ 10  salary_source          143 non-null    object 
+ 11  interval               143 non-null    object 
+ 12  min_amount             143 non-null    float64
+ 13  max_amount             143 non-null    float64
+ 14  currency               143 non-null    object 
+ 15  is_remote              3060 non-null   bool   
+ 16  job_level              3060 non-null   object 
+ 17  job_function           3059 non-null   object 
+ 18  listing_type           0 non-null      float64
+ 19  emails                 573 non-null    object 
+ 20  description            3060 non-null   object 
+ 21  company_industry       3060 non-null   object 
+ 22  company_url            3060 non-null   object 
+ 23  company_logo           3060 non-null   object 
+ 24  company_url_direct     0 non-null      float64
+ 25  company_addresses      0 non-null      float64
+ 26  company_num_employees  0 non-null      float64
+ 27  company_revenue        0 non-null      float64
+ 28  company_description    0 non-null      float64
+ 29  skills                 0 non-null      float64
+ 30  experience_range       0 non-null      float64
+ 31  company_rating         0 non-null      float64
+ 32  company_reviews_count  0 non-null      float64
+ 33  vacancy_count          0 non-null      float64
+ 34  work_from_home_type    0 non-null      float64
+dtypes: bool(1), float64(14), object(20)
+memory usage: 815.9+ KB
+</code></pre>
+<p>Most of the fields that I expect to have values, like <code>title</code>, <code>company</code>, <code>description</code>, <code>company_industry</code> are all filled with values. A couple is lacking some values like <code>location</code> and <code>date_posted</code>. Since I didn&rsquo;t build the scraper, I don&rsquo;t know why they&rsquo;re lacking. It could be crucial, but since the amount of values lacking are not a lot and we supposedly already know the range, it seems fine for me to leave it as is. Sometimes null values like this could reveal crucial problems in the system if this analysis is for business purposes, but that&rsquo;s not the case here.</p>
+<p>The other thing is a few fields don&rsquo;t have all the values but some, like <code>job_url_direct</code>, <code>emails</code>, <code>salary_source</code>, <code>interval</code>, <code>min_amount</code>, <code>max_amount</code> and <code>currency</code>. We won&rsquo;t be analyzing all of these fields in this notebook, but it&rsquo;s interesting to see, for example, 898 out of the 3060 jobs have direct link to their job postings and 573 out of the 3060 jobs have emails. Only 143 out of all jobs have salary ranges, which we&rsquo;ll do some light analysis on later.</p>
+<h3 id="map-of-jobs-counts-of-cities-across-the-us">Map of jobs counts of cities across the US</h3>
+<p>When scraping the data, I tried my best to expand the representation to cities across the US, including cities that are not traditionally represented too much in similar analysis, for example, Milwaukee, WI or Salt Lake City, UT. To show the state of backend engineering jobs in each of the cities, the review will follow the format of dividing each attribute by its geographical locations throughout. To start, below is the map of job counts by city.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f00">import</span> plotly.express <span style="color:#f00">as</span> px
+</span></span><span style="display:flex;"><span><span style="color:#f00">import</span> plotly.io <span style="color:#f00">as</span> pio
+</span></span><span style="display:flex;"><span><span style="color:#f00">from</span> geopy.geocoders <span style="color:#f00">import</span> Nominatim
+</span></span><span style="display:flex;"><span><span style="color:#f00">from</span> geopy.extra.rate_limiter <span style="color:#f00">import</span> RateLimiter
+</span></span><span style="display:flex;"><span><span style="color:#f00">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>area_counts = jobs.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>).size().reset_index(name=<span style="color:#87ceeb">&#34;count&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>geolocator = Nominatim(user_agent=<span style="color:#87ceeb">&#34;job_mapper&#34;</span>, timeout=<span style="color:#f60">10</span>)
+</span></span><span style="display:flex;"><span>geocode = RateLimiter(geolocator.geocode, min_delay_seconds=<span style="color:#f60">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lat_list = []
+</span></span><span style="display:flex;"><span>lon_list = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> area in area_counts[<span style="color:#87ceeb">&#34;area&#34;</span>]:
+</span></span><span style="display:flex;"><span>    loc = geocode(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;</span><span style="color:#87ceeb">{</span>area<span style="color:#87ceeb">}</span><span style="color:#87ceeb">, USA&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> loc:
+</span></span><span style="display:flex;"><span>        lat_list.append(loc.latitude)
+</span></span><span style="display:flex;"><span>        lon_list.append(loc.longitude)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">else</span>:
+</span></span><span style="display:flex;"><span>        lat_list.append(<span style="color:#f00">None</span>)
+</span></span><span style="display:flex;"><span>        lon_list.append(<span style="color:#f00">None</span>)
+</span></span><span style="display:flex;"><span>    time.sleep(<span style="color:#f60">1</span>)  <span style="color:#0f0"># required to avoid rate-limit</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>area_counts[<span style="color:#87ceeb">&#34;lat&#34;</span>] = lat_list
+</span></span><span style="display:flex;"><span>area_counts[<span style="color:#87ceeb">&#34;lon&#34;</span>] = lon_list
+</span></span></code></pre></div><p>This code block import necessary libraries, find the latitude, longitude of each city, state pair and then combine them. It only needs to be run once. The following code block plot the map of job counts by city in the US.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>area_counts = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;area2latlon.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig = px.scatter_geo(
+</span></span><span style="display:flex;"><span>    area_counts,
+</span></span><span style="display:flex;"><span>    lat=<span style="color:#87ceeb">&#34;lat&#34;</span>,
+</span></span><span style="display:flex;"><span>    lon=<span style="color:#87ceeb">&#34;lon&#34;</span>,
+</span></span><span style="display:flex;"><span>    size=<span style="color:#87ceeb">&#34;count&#34;</span>,
+</span></span><span style="display:flex;"><span>    hover_name=<span style="color:#87ceeb">&#34;area&#34;</span>,
+</span></span><span style="display:flex;"><span>    hover_data={<span style="color:#87ceeb">&#34;count&#34;</span>: <span style="color:#f00">True</span>},
+</span></span><span style="display:flex;"><span>    size_max=<span style="color:#f60">50</span>,
+</span></span><span style="display:flex;"><span>    opacity=<span style="color:#f60">0.7</span>,
+</span></span><span style="display:flex;"><span>    color=<span style="color:#87ceeb">&#34;count&#34;</span>,
+</span></span><span style="display:flex;"><span>    color_continuous_scale=<span style="color:#87ceeb">&#34;Viridis&#34;</span>,
+</span></span><span style="display:flex;"><span>    projection=<span style="color:#87ceeb">&#34;albers usa&#34;</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Balanced background and black state lines</span>
+</span></span><span style="display:flex;"><span>fig.update_layout(
+</span></span><span style="display:flex;"><span>    title=<span style="color:#87ceeb">&#34;Jobs Counts By City Across The US&#34;</span>,
+</span></span><span style="display:flex;"><span>    title_font_size=<span style="color:#f60">20</span>,
+</span></span><span style="display:flex;"><span>    title_font_color=<span style="color:#87ceeb">&#34;#555555&#34;</span>,   <span style="color:#0f0"># grey title</span>
+</span></span><span style="display:flex;"><span>    geo=dict(
+</span></span><span style="display:flex;"><span>        scope=<span style="color:#87ceeb">&#34;usa&#34;</span>,
+</span></span><span style="display:flex;"><span>        showland=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        landcolor=<span style="color:#87ceeb">&#34;#e0e0e0&#34;</span>,        <span style="color:#0f0"># medium-light gray</span>
+</span></span><span style="display:flex;"><span>        lakecolor=<span style="color:#87ceeb">&#34;#d0e8ff&#34;</span>,        <span style="color:#0f0"># pale blue lakes</span>
+</span></span><span style="display:flex;"><span>        showlakes=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        showcountries=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        countrycolor=<span style="color:#87ceeb">&#34;gray&#34;</span>,
+</span></span><span style="display:flex;"><span>        showcoastlines=<span style="color:#f00">False</span>,
+</span></span><span style="display:flex;"><span>        bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,           <span style="color:#0f0"># soft gray background</span>
+</span></span><span style="display:flex;"><span>        showsubunits=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        subunitcolor=<span style="color:#87ceeb">&#34;gray&#34;</span>,         <span style="color:#0f0"># black state lines</span>
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    paper_bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,         <span style="color:#0f0"># soft gray outside map</span>
+</span></span><span style="display:flex;"><span>    font=dict(color=<span style="color:#87ceeb">&#34;black&#34;</span>),
+</span></span><span style="display:flex;"><span>    margin={<span style="color:#87ceeb">&#34;r&#34;</span>:<span style="color:#f60">0</span>,<span style="color:#87ceeb">&#34;t&#34;</span>:<span style="color:#f60">50</span>,<span style="color:#87ceeb">&#34;l&#34;</span>:<span style="color:#f60">0</span>,<span style="color:#87ceeb">&#34;b&#34;</span>:<span style="color:#f60">0</span>},
+</span></span><span style="display:flex;"><span>    height=<span style="color:#f60">500</span>,
+</span></span><span style="display:flex;"><span>    width=<span style="color:#f60">1000</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Optional: add city labels</span>
+</span></span><span style="display:flex;"><span>fig.update_traces(text=area_counts[<span style="color:#87ceeb">&#34;area&#34;</span>], textposition=<span style="color:#87ceeb">&#34;top center&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig.show()
+</span></span></code></pre></div><p>It looks like a lot of code, but it&rsquo;s mostly styling.</p>
+
+<iframe src="/embeds/job_counts_by_city_us.html" width="710" height="410"></iframe>
+
+<p>Each city&rsquo;s job data is manually scraped using <a href="https://github.com/speedyapply/JobSpy">an existing scraping API</a>, so it&rsquo;s black box why the scraper found the resulting number of jobs. The number is correlated with our impression of which city has more tech jobs, but there&rsquo;s no way, for example, Boston, SF and Denver all have exactly 140 jobs at the time it&rsquo;s being scraped.</p>
+<p>In any way, there&rsquo;re more jobs in commonly-known tech hubs like San Francisco and San Jose, CA (= 140). But there are also a lot of backend engineering jobs in big cities like Baltimore, Washington DC and Chicago. It might be expected that Southern state have fewer jobs, but it&rsquo;s good to see that these following cities also have a decent amount of jobs:</p>
+<ul>
+<li>Atlanta, GA</li>
+<li>Raleigh, NC</li>
+<li>Charlotte, NC</li>
+<li>Detroit, MI (80)</li>
+<li>Minneapolis, MN (75)</li>
+<li>Cincinnati, OH (70)</li>
+<li>Phoenix, AZ (70)</li>
+<li>Salt Lake City, UT (70)</li>
+<li>Hartford, CT (70)</li>
+<li>Pittsburgh, PA (69)</li>
+</ul>
+<p>Especially Atlanta, GA has 120 jobs, Raleigh and Charlotte from North Carolina have 90 and 89 jobs found respectively. For comparison, Hartford, CT also have 70 jobs and Hartford is one of the small cities that has a lot of very well-paid tech jobs right above the NY state.</p>
+
+<iframe src="/embeds/ratio_of_job_counts_by_city.html" width="710" height="510"></iframe>
+
+<p>It seems from the US map of job counts by city that the majority of the jobs are from big tech cities. However, breaking it down in the second box/proportion graph, it&rsquo;s obvious that the number of jobs from big tech cities is clearly below the total number of jobs in the dataset. Moreover, there&rsquo;s a significant representation of cities from red states in the rest of the dataset, demonstrated by the city names in most of the boxes on the right side of the plot.</p>
+<h2 id="-salary">💵 Salary</h2>
+<p>There&rsquo;re 143 jobs that have salary listed in total. Related fields are <code>salary_source</code>, <code>interval</code>, <code>min_amount</code> and <code>max_amount</code>. The field names are sort of arbitrary so we take a look at the first value of each field to see what they are exactly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>salary_source = jobs.salary_source.dropna().tolist()
+</span></span><span style="display:flex;"><span>intervals = jobs.interval.dropna().tolist()
+</span></span><span style="display:flex;"><span>min_amount = jobs.min_amount.dropna().tolist()
+</span></span><span style="display:flex;"><span>max_amount = jobs.max_amount.dropna().tolist()
+</span></span><span style="display:flex;"><span>print(<span style="color:#87ceeb">&#34;First value of each related field </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">&#34;</span>+
+</span></span><span style="display:flex;"><span><span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;salary_source: </span><span style="color:#87ceeb">\&#34;</span><span style="color:#87ceeb">{</span>salary_source[<span style="color:#f60">0</span>]<span style="color:#87ceeb">}</span><span style="color:#87ceeb">\&#34;</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">interval: </span><span style="color:#87ceeb">{</span>intervals[<span style="color:#f60">0</span>]<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">min_amount: </span><span style="color:#87ceeb">{</span>min_amount[<span style="color:#f60">0</span>]<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">max_amount: </span><span style="color:#87ceeb">{</span>max_amount[<span style="color:#f60">0</span>]<span style="color:#87ceeb">}</span><span style="color:#87ceeb">&#34;</span>)
+</span></span></code></pre></div><pre><code>First value of each related field 
+salary_source: &quot;description&quot; 
+interval: yearly 
+min_amount: 90000.0 
+max_amount: 110000.0
+</code></pre>
+<p>From experience <code>salary_source</code> and <code>interval</code> would be the same for each of the 143 row. Just for scientific spirits, let&rsquo;s verify that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>salary_source_unique = jobs.salary_source.dropna().unique().tolist()
+</span></span><span style="display:flex;"><span>intervals_unique = jobs.interval.dropna().unique().tolist()
+</span></span><span style="display:flex;"><span>print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;Salary source(s): </span><span style="color:#87ceeb">{</span>salary_source_unique<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">Intervals: </span><span style="color:#87ceeb">{</span>intervals_unique<span style="color:#87ceeb">}</span><span style="color:#87ceeb">&#34;</span>)
+</span></span></code></pre></div><pre><code>Salary source(s): ['description'] 
+Intervals: ['yearly', 'hourly']
+</code></pre>
+<p>Turned out it&rsquo;s good we checked. When inspecting min salary amount and max salary amount, we&rsquo;ll check these seperately.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>min_amount_yearly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;yearly&#39;</span>].min_amount.dropna().tolist()
+</span></span><span style="display:flex;"><span>max_amount_yearly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;yearly&#39;</span>].max_amount.dropna().tolist()
+</span></span><span style="display:flex;"><span>min_amount_hourly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;hourly&#39;</span>].min_amount.dropna().tolist()
+</span></span><span style="display:flex;"><span>max_amount_hourly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;hourly&#39;</span>].max_amount.dropna().tolist()
+</span></span><span style="display:flex;"><span>print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;# of yearly salary instances: </span><span style="color:#87ceeb">{</span>len(min_amount_yearly)<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb"># of hourly salary instance(s): </span><span style="color:#87ceeb">{</span>len(min_amount_hourly)<span style="color:#87ceeb">}</span><span style="color:#87ceeb">&#34;</span>)
+</span></span></code></pre></div><pre><code># of yearly salary instances: 140 
+# of hourly salary instance(s): 3
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f00">for</span> i in range(<span style="color:#f60">3</span>):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;Hourly rate range </span><span style="color:#87ceeb">{</span>i+<span style="color:#f60">1</span><span style="color:#87ceeb">}</span><span style="color:#87ceeb">: $</span><span style="color:#87ceeb">{</span>min_amount_hourly[i]<span style="color:#87ceeb">}</span><span style="color:#87ceeb">/hr - $</span><span style="color:#87ceeb">{</span>max_amount_hourly[i]<span style="color:#87ceeb">}</span><span style="color:#87ceeb">/hr&#34;</span>)
+</span></span></code></pre></div><pre><code>Hourly rate range 1: $30.0/hr - $33.0/hr
+Hourly rate range 2: $75.0/hr - $80.0/hr
+Hourly rate range 3: $40.0/hr - $45.0/hr
+</code></pre>
+<p>We can translate hourly rates to yearly rates assuming the job works 40hr/week and 4 weeks/month.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f00">for</span> i in range(<span style="color:#f60">3</span>):
+</span></span><span style="display:flex;"><span>    min_amount_yearly.append(min_amount_hourly[i]*<span style="color:#f60">40</span>*<span style="color:#f60">4</span>*<span style="color:#f60">12</span>)
+</span></span><span style="display:flex;"><span>    max_amount_yearly.append(max_amount_hourly[i]*<span style="color:#f60">40</span>*<span style="color:#f60">4</span>*<span style="color:#f60">12</span>)
+</span></span></code></pre></div><p>So then we get the numerical lower and higher end of minimal and maximal amount of salaries.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;Lower end of minimal amount of salary: $</span><span style="color:#87ceeb">{</span>min(min_amount_yearly)/<span style="color:#f60">1000</span><span style="color:#87ceeb">}</span><span style="color:#87ceeb">k </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">&#34;</span> +
+</span></span><span style="display:flex;"><span>      <span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;Higher end of minimal amount of salary: $</span><span style="color:#87ceeb">{</span>max(min_amount_yearly)/<span style="color:#f60">1000</span><span style="color:#87ceeb">}</span><span style="color:#87ceeb">k&#34;</span>)
+</span></span></code></pre></div><pre><code>Lower end of minimal amount of salary: $50.0k 
+Higher end of minimal amount of salary: $300.0k
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;Lower end of maximal amount of salary: $</span><span style="color:#87ceeb">{</span>min(max_amount_yearly)/<span style="color:#f60">1000</span><span style="color:#87ceeb">}</span><span style="color:#87ceeb">k </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">&#34;</span> +
+</span></span><span style="display:flex;"><span>      <span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;Higher end of maximal amount of salary: $</span><span style="color:#87ceeb">{</span>max(max_amount_yearly)/<span style="color:#f60">1000</span><span style="color:#87ceeb">}</span><span style="color:#87ceeb">k&#34;</span>)
+</span></span></code></pre></div><pre><code>Lower end of maximal amount of salary: $63.36k 
+Higher end of maximal amount of salary: $405.0k
+</code></pre>
+<p>It seems sort of arbitrary what these number actually means, so in the next section we look at the distribution for all salaries and then create maps of stats by city again.</p>
+<h3 id="distribution-of-salary-range">Distribution of Salary Range</h3>
+<p>First we load the libraries.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f00">import</span> matplotlib.pyplot <span style="color:#f00">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f00">import</span> logging
+</span></span><span style="display:flex;"><span>logging.getLogger(<span style="color:#87ceeb">&#34;matplotlib.font_manager&#34;</span>).disabled = <span style="color:#f00">True</span>
+</span></span></code></pre></div><p>The following create a styled graph of minimal and maximal salary distribution.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y_min = [<span style="color:#f60">1</span>] * len(min_amount_yearly)
+</span></span><span style="display:flex;"><span>y_max = [<span style="color:#f60">2</span>] * len(max_amount_yearly)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.xkcd()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.figure(figsize=(<span style="color:#f60">9</span>, <span style="color:#f60">4</span>))
+</span></span><span style="display:flex;"><span>plt.scatter([x/<span style="color:#f60">1000</span> <span style="color:#f00">for</span> x in min_amount_yearly], y_min, s=<span style="color:#f60">200</span>, color=<span style="color:#87ceeb">&#39;#FFB347&#39;</span>, label=<span style="color:#87ceeb">&#39;List1&#39;</span>, marker=<span style="color:#87ceeb">&#39;o&#39;</span>, alpha=<span style="color:#f60">0.7</span>)
+</span></span><span style="display:flex;"><span>plt.scatter([x/<span style="color:#f60">1000</span> <span style="color:#f00">for</span> x in max_amount_yearly], y_max, s=<span style="color:#f60">200</span>, color=<span style="color:#87ceeb">&#39;#6A5ACD&#39;</span>, label=<span style="color:#87ceeb">&#39;List2&#39;</span>, marker=<span style="color:#87ceeb">&#39;o&#39;</span>, alpha=<span style="color:#f60">0.7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Customize axes</span>
+</span></span><span style="display:flex;"><span>plt.xticks(range(<span style="color:#f60">0</span>, int(max(max_amount_yearly)/<span style="color:#f60">1000</span>), <span style="color:#f60">10</span>), rotation=<span style="color:#f60">60</span>)
+</span></span><span style="display:flex;"><span>plt.yticks([<span style="color:#f60">1</span>,<span style="color:#f60">2</span>], [<span style="color:#87ceeb">&#39;min salary&#39;</span>, <span style="color:#87ceeb">&#39;max salary&#39;</span>], rotation=<span style="color:#f60">45</span>)
+</span></span><span style="display:flex;"><span>plt.xlabel(<span style="color:#87ceeb">&#39;salary (k/yr)&#39;</span>)
+</span></span><span style="display:flex;"><span>y_min = <span style="color:#f60">0.5</span>
+</span></span><span style="display:flex;"><span>y_max = <span style="color:#f60">2.45</span>
+</span></span><span style="display:flex;"><span>plt.ylim(y_min, y_max)
+</span></span><span style="display:flex;"><span>plt.title(<span style="color:#87ceeb">&#39;Backend engineer salary range distribution&#39;</span>)
+</span></span><span style="display:flex;"><span>plt.grid(axis=<span style="color:#87ceeb">&#39;x&#39;</span>, linestyle=<span style="color:#87ceeb">&#39;:&#39;</span>, linewidth=<span style="color:#f60">1.65</span>, color=<span style="color:#87ceeb">&#39;#333333&#39;</span>, alpha=<span style="color:#f60">0.7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.show()
+</span></span></code></pre></div><p><img src="/images/salary-distribution.png" alt="salary distribution"></p>
+<p>It feels like the lower end of most salary ranges between $50k - $210k and the higher end of most salary ranges from $65k to $300k. By my own job browsing experience, this is pretty accurate. Compared to most tech jobs, this actually seems a bit low (quite low). If you search for data scientist or ML Eng jobs, the higher end could easily go up to around 600k to 800k. The following analysis will show,  however, <strong>why in my opinion, backend engineering is a great first job for job seekers in this market and will likely open up further opportunities.</strong></p>
+<p><strong>P.S.</strong> If you&rsquo;re wondering why the graph is all doodles it&rsquo;s because of this magical command <code>plt.xkcd()</code>. You don&rsquo;t have to download extra packages because it&rsquo;s included in <code>matplotlib</code> but you do have to suppress the font manager warnings using <code>logging.getLogger(&quot;matplotlib.font_manager&quot;).disabled = True</code>.</p>
+<h3 id="median-minimal-and-maximal-yearly-salary-across-us-cities">Median minimal and maximal yearly salary across US cities</h3>
+<p>The code for plotting the map is similar to the above and very long just because of styling, so it&rsquo;s skipped. But the data aggregation and manipulation code is shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Converting hourly rates to yearly rates</span>
+</span></span><span style="display:flex;"><span>min_amount_yearly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;yearly&#39;</span>].min_amount.dropna()
+</span></span><span style="display:flex;"><span>max_amount_yearly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;yearly&#39;</span>].max_amount.dropna()
+</span></span><span style="display:flex;"><span>min_amount_hourly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;hourly&#39;</span>].min_amount.dropna()
+</span></span><span style="display:flex;"><span>max_amount_hourly = jobs[jobs.interval == <span style="color:#87ceeb">&#39;hourly&#39;</span>].max_amount.dropna()
+</span></span><span style="display:flex;"><span>min_amount_hourly = min_amount_hourly * <span style="color:#f60">40</span> * <span style="color:#f60">4</span> * <span style="color:#f60">12</span>
+</span></span><span style="display:flex;"><span>max_amount_hourly = max_amount_hourly * <span style="color:#f60">40</span> * <span style="color:#f60">4</span> * <span style="color:#f60">12</span>
+</span></span><span style="display:flex;"><span>min_amount_yearly = pd.concat([min_amount_yearly, min_amount_hourly], ignore_index=<span style="color:#f00">True</span>)
+</span></span><span style="display:flex;"><span>max_amount_yearly = pd.concat([max_amount_yearly, max_amount_hourly], ignore_index=<span style="color:#f00">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Data preparation: filtering cities that have jobs with salary</span>
+</span></span><span style="display:flex;"><span>indices = jobs.min_amount.dropna().index.tolist()
+</span></span><span style="display:flex;"><span>areas_with_valid_rates = jobs.loc[indices].area.tolist()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Data preparation: create the dataframe</span>
+</span></span><span style="display:flex;"><span>data = {<span style="color:#87ceeb">&#34;area&#34;</span>: areas_with_valid_rates,
+</span></span><span style="display:flex;"><span>       <span style="color:#87ceeb">&#34;min_amount&#34;</span>: min_amount_yearly.tolist(),
+</span></span><span style="display:flex;"><span>       <span style="color:#87ceeb">&#34;max_amount&#34;</span>: max_amount_yearly.tolist()}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>df_salary_by_area = pd.DataFrame(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Data aggregation: median minimal salary and job counts</span>
+</span></span><span style="display:flex;"><span>df_area_min_salary_median = (
+</span></span><span style="display:flex;"><span>    df_salary_by_area.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>)
+</span></span><span style="display:flex;"><span>    .agg(
+</span></span><span style="display:flex;"><span>        min_amount_median=(<span style="color:#87ceeb">&#34;min_amount&#34;</span>, <span style="color:#87ceeb">&#34;median&#34;</span>),
+</span></span><span style="display:flex;"><span>        count=(<span style="color:#87ceeb">&#34;min_amount&#34;</span>, <span style="color:#87ceeb">&#34;count&#34;</span>)   <span style="color:#0f0"># count rows per area</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    .reset_index()
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Data aggregation: median maximal salary and job counts</span>
+</span></span><span style="display:flex;"><span>df_area_max_salary_median = (
+</span></span><span style="display:flex;"><span>    df_salary_by_area.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>)
+</span></span><span style="display:flex;"><span>    .agg(
+</span></span><span style="display:flex;"><span>        max_amount_median=(<span style="color:#87ceeb">&#34;max_amount&#34;</span>, <span style="color:#87ceeb">&#34;median&#34;</span>),
+</span></span><span style="display:flex;"><span>        count=(<span style="color:#87ceeb">&#34;max_amount&#34;</span>, <span style="color:#87ceeb">&#34;count&#34;</span>)   <span style="color:#0f0"># same count (based on max_amount)</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    .reset_index()
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>area_counts = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;area2latlon.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --------Gets missing areas----------</span>
+</span></span><span style="display:flex;"><span>df_area_min_salary_median = df_area_min_salary_median.merge(
+</span></span><span style="display:flex;"><span>    area_counts[[<span style="color:#87ceeb">&#39;area&#39;</span>, <span style="color:#87ceeb">&#39;lat&#39;</span>, <span style="color:#87ceeb">&#39;lon&#39;</span>]],
+</span></span><span style="display:flex;"><span>    on=<span style="color:#87ceeb">&#39;area&#39;</span>,
+</span></span><span style="display:flex;"><span>    how=<span style="color:#87ceeb">&#39;left&#39;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Get sets of areas</span>
+</span></span><span style="display:flex;"><span>all_areas = set(jobs[<span style="color:#87ceeb">&#34;area&#34;</span>])
+</span></span><span style="display:flex;"><span>median_areas = set(df_area_min_salary_median[<span style="color:#87ceeb">&#34;area&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Areas present in jobs but missing in median</span>
+</span></span><span style="display:flex;"><span>missing_areas = list(all_areas - median_areas)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Subset lat/lon for missing areas</span>
+</span></span><span style="display:flex;"><span>missing_coords = area_counts[area_counts[<span style="color:#87ceeb">&#34;area&#34;</span>].isin(missing_areas)][[<span style="color:#87ceeb">&#39;area&#39;</span>, <span style="color:#87ceeb">&#39;lat&#39;</span>, <span style="color:#87ceeb">&#39;lon&#39;</span>]]
+</span></span></code></pre></div><p>The resulted maps are shown below.</p>
+
+<iframe src="/embeds/min_salary_map.html" width="710" height="410"></iframe>
+
+
+<iframe src="/embeds/max_salary_map.html" width="710" height="410"></iframe>
+
+<p>The first thing to notice is a few cities you wouldn&rsquo;t normally expect to have high median salaries have higher median salaries than big tech cities like East coast cities and even San Francisco and San Jose. If you hover on the bubbles, the labels tell you how many job in that city had salary stated in the listing. It&rsquo;s clear from the job count labels that most of these cities only have 1 to 3 jobs that have salary labels, which means those are the only salaries to take median values from. What it means is that at least the median salary of these cities could not be fully trusted. Another possible interpretation could be that only companies who can offer good salary listed the number, which sound much more possible but is hard to verify for sure.</p>
+<p>The couple other things to notice is that San Diego, CA has a bit more jobs (5) that have salary listing and higher salary median, $172k/yr - $258k/yr. Next, the following cities have a couple salary listings that showed that they actually don&rsquo;t pay that well (diabolically).</p>
+<ul>
+<li>Salt Lake City, UT ($101k/yr - $108.5k/yr)</li>
+<li>Milwaukee, WI ($77k/yr - $86k/yr)</li>
+<li>Detroit, MI ($80k/yr - $110k/yr)</li>
+<li>Indianapolis, IN ($70k/yr - $75k/yr)</li>
+<li>Birmingham, AL ($90k/yr - $110k/yr)</li>
+</ul>
+<p>The fact that these cities only have a couple salary listings are already suspicious. Moreover, the median salaries in most cities on the graph is $130k/yr - $195k/yr if you hover over the darker green bubbles. So having only a couple listings that ranges from around $80k/yr to barely reaching $110k/yr demonstrates that these cities might not have the most well-paid jobs.</p>
+<p>Lastly, the cities that don&rsquo;t have jobs with salary listed are a mix of a couple big cities or cities that I know have good tech jobs like Hartford, CT, and major cities from red states. I&rsquo;d not draw any definite conclusions from it.</p>
+<hr>
+<p>This concludes Part. I of my review of backend engineering job. Hope it&rsquo;s interesting in some ways.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>
