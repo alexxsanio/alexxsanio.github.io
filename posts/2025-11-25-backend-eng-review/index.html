@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
    <meta name="description" content="Why a review of backend engineering?
-Like many people, I&rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased. Jobs like ML or AI engineer especially would require many years of experience. From stories I&rsquo;ve heard, it seems like there&rsquo;re only two ways to actually get a decent-paying job in a good company: either you get an internship which then leads to a job, or you get an ML-adjacent job and hop to an ML job in the same company.">  
+Like many people, I&rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased (Is Data Science Dying? - Marina Wyss - AI &amp; Machine Learning). Jobs like ML or AI engineer especially would require many years of experience. From stories I&rsquo;ve heard, it seems like either you get an internship which would lead to a full-time job, or you get an ML-adjacent job and transfer to an ML job in the same company.">  
 
   <title>
     
@@ -39,10 +39,10 @@ Like many people, I&rsquo;m trying to break into the AI / software industry. Thi
     
 
     <h2 id="why-a-review-of-backend-engineering">Why a review of backend engineering?</h2>
-<p>Like many people, I&rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased. Jobs like ML or AI engineer especially would require many years of experience. From stories I&rsquo;ve heard, it seems like there&rsquo;re only two ways to actually get a decent-paying job in a good company: either you get an internship which then leads to a job, or you get an ML-adjacent job and hop to an ML job in the same company.</p>
-<p>Software engineering could have any job function, mostly are either frontend, backend, full-stack or more data-intensive. To me personally, backend engineering is much more interesting because it feels more algorithmic and would touch on challenging and interesting problems like software architecturing and database management. In comparison, frontend coding is usually messy and relatively straightforward (don&rsquo;t hit me on this&hellip;I know some frontend engineering could be very intelligent, but this is just my personal experience).</p>
+<p>Like many people, I&rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased (<a href="https://www.youtube.com/watch?v=VbB9irtpoDc">Is Data Science Dying? - Marina Wyss - AI &amp; Machine Learning</a>). Jobs like ML or AI engineer especially would require many years of experience. From stories I&rsquo;ve heard, it seems like either you get an internship which would lead to a full-time job, or you get an ML-adjacent job and transfer to an ML job in the same company.</p>
+<p>One of the best ML-adjacent job is naturally software engineer. Jobs titled with software engineer couldbe an umbralla term for a number of actual jobs. The job could focus on any of: frontend, backend, full-stack or even data engineering. Any of them are valid and interesting job functions. Here I focus on backend engineering just because I prefer it. It&rsquo;s more algorithmic and would touch on more challenging problems than simply interacting with database like software architecturing and database management.</p>
 <h2 id="intro-to-this-series">Intro to this series</h2>
-<p>This notebook uses <a href="https://github.com/speedyapply/JobSpy">a pre-existing tool</a> to scrape the most recent backend engineering jobs from areas adjacent to major cities across the US, covering as much state as possible. The choice of cities is somewhat arbitrary. It has 3060 jobs from the past months, each job has the following attributes:</p>
+<p>This notebook uses a pre-existing Python library <a href="https://github.com/speedyapply/JobSpy">(github)</a> to scrape backend engineering jobs from major cities across the US, including most states. The choice of which city to scrape is arbitrary. In the end, the dataset was able to find 3060 jobs across the US. Each job is garanteed to have the following attributes:</p>
 <ul>
 <li>title</li>
 <li>location</li>
@@ -55,14 +55,18 @@ Like many people, I&rsquo;m trying to break into the AI / software industry. Thi
 <li>job function</li>
 <li>description</li>
 </ul>
-<p>The city and state name used to search for jobs is added as the <code>area</code> of jobs. It could be different from the exact location of the job.</p>
-<p><strong>Notes 0.1</strong>: the scrapper is pre-built so I don&rsquo;t know how it decides which job to keep.<br>
-<strong>Notes 0.2</strong>: the appendix at the end of the notebook have a list of cities covered in the dataset and the data aggregation pipeline.<br>
-<strong>Notes 0.3</strong>: all data are available on Kaggle: <a href="https://www.kaggle.com/datasets/tianyimasf/backend-engineer-jobs-us/data"><strong>view and download</strong></a></p>
+<p>The city and state used to search for jobs is added as the <code>area</code> of jobs. The exact location of the actual jobs found could be different from the search term.</p>
+<p>A few notes:</p>
+<ul>
+<li>I didn&rsquo;t write the scrapper so I don&rsquo;t know how it finds the jobs.</li>
+<li>I&rsquo;ll attach in the end a list of cities covered in the dataset and the data aggregation pipeline.</li>
+<li>All data are available on Kaggle: <a href="https://www.kaggle.com/datasets/tianyimasf/backend-engineer-jobs-us/data"><strong>view and download</strong></a></li>
+</ul>
 <h2 id="-exploratory-data-analysis">🔍 Exploratory Data Analysis</h2>
-<p>For this analysis, I only scraped jobs from LinkedIn. Indeed is weird to use and Google Job&rsquo;s data is usually dirty, and the jobs postings have a lot of overlaps anyways.</p>
-<p>From a first glance, we can see that there&rsquo;re a lot of null values in a lot of the fields. But if you look at the field names closely, most of the fields are not that important anyways. It&rsquo;s good to know them if exists, but not necessary to get a snapshot of what kind of backend engineering jobs are out there and what they require.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>jobs = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;jobs.csv&#34;</span>)
+<p>For this analysis, I only scraped jobs from LinkedIn. There&rsquo;re also plenty of jobs on Indeed and Google Jobs, but LinkedIn&rsquo;s data is relatively clean and there would exist a lot of overlaps.</p>
+<p>I like to run <code>jobs.info()</code> to see what field exists, what is their data type and how many valid values they have.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># EDA</span>
+</span></span><span style="display:flex;"><span>jobs = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;jobs.csv&#34;</span>)
 </span></span><span style="display:flex;"><span>jobs.info()
 </span></span></code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 3060 entries, 0 to 3059
@@ -107,16 +111,25 @@ Data columns (total 35 columns):
 dtypes: bool(1), float64(14), object(20)
 memory usage: 815.9+ KB
 </code></pre>
-<p>Most of the fields that I expect to have values, like <code>title</code>, <code>company</code>, <code>description</code>, <code>company_industry</code> are all filled with values. A couple is lacking some values like <code>location</code> and <code>date_posted</code>. Since I didn&rsquo;t build the scraper, I don&rsquo;t know why they&rsquo;re lacking. It could be crucial, but since the amount of values lacking are not a lot and we supposedly already know the range, it seems fine for me to leave it as is. Sometimes null values like this could reveal crucial problems in the system if this analysis is for business purposes, but that&rsquo;s not the case here.</p>
-<p>The other thing is a few fields don&rsquo;t have all the values but some, like <code>job_url_direct</code>, <code>emails</code>, <code>salary_source</code>, <code>interval</code>, <code>min_amount</code>, <code>max_amount</code> and <code>currency</code>. We won&rsquo;t be analyzing all of these fields in this notebook, but it&rsquo;s interesting to see, for example, 898 out of the 3060 jobs have direct link to their job postings and 573 out of the 3060 jobs have emails. Only 143 out of all jobs have salary ranges, which we&rsquo;ll do some light analysis on later.</p>
+<p>At first glance, the dataset has a lot of null values. However, on a closer look, a lot of the fields are not that important in the first palce. They&rsquo;re good to know if exists, but not necessary. Most of the fields that&rsquo;s expected to have values, like <code>title</code>, <code>company</code>, <code>description</code>, <code>company_industry</code> are all full.</p>
+<details>
+  <summary>Additional notes</summary>
+  <div style="margin-top: 10px;">
+    A couple of columns that&rsquo;s expected to have full values, like <code>location</code> and <code>date_posted</code>, lack part of the values. Since I didn&rsquo;t build the scraper, I don&rsquo;t know why the values are lacking. For a serious analysis, this could be crucial. Since most of the values are present and we should already know the range based on the search term, it seems fine for me to leave it as is. Sometimes null values like this could reveal crucial problems in the system if this analysis is for business purposes, but that&rsquo;s not the case here.
+  </div>
+</details>
+<p>The other thing is a few fields don&rsquo;t have all the values but only some, like <code>job_url_direct</code>, <code>emails</code>, <code>salary_source</code>, <code>interval</code>, <code>min_amount</code>, <code>max_amount</code> and <code>currency</code>. Not all of these fields in this notebook will be analyzed, but it&rsquo;s interesting to see, for example, 898 out of the 3060 jobs have direct link to their job postings and 573 out of the 3060 jobs have emails. Only 143 out of all jobs have salary ranges, which we&rsquo;ll do some light analysis on in the next section &ldquo;Salary&rdquo;.</p>
 <h3 id="map-of-jobs-counts-of-cities-across-the-us">Map of jobs counts of cities across the US</h3>
-<p>When scraping the data, I tried my best to expand the representation to cities across the US, including cities that are not traditionally represented too much in similar analysis, for example, Milwaukee, WI or Salt Lake City, UT. To show the state of backend engineering jobs in each of the cities, the review will follow the format of dividing each attribute by its geographical locations throughout. To start, below is the map of job counts by city.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f00">import</span> plotly.express <span style="color:#f00">as</span> px
+<p>When scraping jobs, I tried my best to expand the search to represent major cities in most states and include cities that are not traditionally represented in similar analysis. For example, Milwaukee, WI, Salt Lake City, UT, Birmingham, AL and Jackson, MS are all included. Even if the analysis is not applied to any specific city or state, all codes will be available as expandable code blocks and all data will be available by city or as a whole so that people can conduct analysis themselves if they want to. To show the state of backend engineering jobs in each of the cities, the review will follow the format of dividing each attribute by its geographical locations in each main section.</p>
+<p>Below is the code to create a map of job counts by city.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># import libraries</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">import</span> plotly.express <span style="color:#f00">as</span> px
 </span></span><span style="display:flex;"><span><span style="color:#f00">import</span> plotly.io <span style="color:#f00">as</span> pio
 </span></span><span style="display:flex;"><span><span style="color:#f00">from</span> geopy.geocoders <span style="color:#f00">import</span> Nominatim
 </span></span><span style="display:flex;"><span><span style="color:#f00">from</span> geopy.extra.rate_limiter <span style="color:#f00">import</span> RateLimiter
 </span></span><span style="display:flex;"><span><span style="color:#f00">import</span> time
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># convert city, state to latitude, longitude</span>
 </span></span><span style="display:flex;"><span>area_counts = jobs.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>).size().reset_index(name=<span style="color:#87ceeb">&#34;count&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>geolocator = Nominatim(user_agent=<span style="color:#87ceeb">&#34;job_mapper&#34;</span>, timeout=<span style="color:#f60">10</span>)
@@ -137,8 +150,9 @@ memory usage: 815.9+ KB
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>area_counts[<span style="color:#87ceeb">&#34;lat&#34;</span>] = lat_list
 </span></span><span style="display:flex;"><span>area_counts[<span style="color:#87ceeb">&#34;lon&#34;</span>] = lon_list
-</span></span></code></pre></div><p>This code block import necessary libraries, find the latitude, longitude of each city, state pair and then combine them. It only needs to be run once. The following code block plot the map of job counts by city in the US.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>area_counts = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;area2latlon.csv&#34;</span>)
+</span></span></code></pre></div><p>This only needs to be run once. The following code plots the map of job counts by city in the US.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># import saved file that map city, state to latitude, longitude</span>
+</span></span><span style="display:flex;"><span>area_counts = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;area2latlon.csv&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>fig = px.scatter_geo(
 </span></span><span style="display:flex;"><span>    area_counts,
@@ -183,12 +197,17 @@ memory usage: 815.9+ KB
 </span></span><span style="display:flex;"><span>fig.update_traces(text=area_counts[<span style="color:#87ceeb">&#34;area&#34;</span>], textposition=<span style="color:#87ceeb">&#34;top center&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>fig.show()
-</span></span></code></pre></div><p>It looks like a lot of code, but it&rsquo;s mostly styling.</p>
+</span></span></code></pre></div><p>It looks like a lot of code, but it&rsquo;s mostly just styling.</p>
 
 <iframe src="/embeds/job_counts_by_city_us.html" width="710" height="410"></iframe>
 
-<p>Each city&rsquo;s job data is manually scraped using <a href="https://github.com/speedyapply/JobSpy">an existing scraping API</a>, so it&rsquo;s black box why the scraper found the resulting number of jobs. The number is correlated with our impression of which city has more tech jobs, but there&rsquo;s no way, for example, Boston, SF and Denver all have exactly 140 jobs at the time it&rsquo;s being scraped.</p>
-<p>In any way, there&rsquo;re more jobs in commonly-known tech hubs like San Francisco and San Jose, CA (= 140). But there are also a lot of backend engineering jobs in big cities like Baltimore, Washington DC and Chicago. It might be expected that Southern state have fewer jobs, but it&rsquo;s good to see that these following cities also have a decent amount of jobs:</p>
+<details>
+  <summary>Additional notes</summary>
+  <div style="margin-top: 10px;">
+    It&rsquo;s black box why the scraper found exactly 140 jobs for all Boston, SF, San Jose, Seattle and Denver, but it&rsquo;s okay in my opinion because the numbers in general are correlated with our impression of which city has more tech jobs.
+  </div>
+</details>
+<p>There&rsquo;re more jobs in commonly-known tech hubs like San Francisco and San Jose (= 140). But there&rsquo;re also a lot of backend engineering jobs in big cities like Baltimore, Washington D.C. and Chicago. It might be expected that Southern state have fewer jobs, but it&rsquo;s good to see that these following cities also have a decent amount of jobs:</p>
 <ul>
 <li>Atlanta, GA</li>
 <li>Raleigh, NC</li>
@@ -201,13 +220,13 @@ memory usage: 815.9+ KB
 <li>Hartford, CT (70)</li>
 <li>Pittsburgh, PA (69)</li>
 </ul>
-<p>Especially Atlanta, GA has 120 jobs, Raleigh and Charlotte from North Carolina have 90 and 89 jobs found respectively. For comparison, Hartford, CT also have 70 jobs and Hartford is one of the small cities that has a lot of very well-paid tech jobs right above the NY state.</p>
+<p>Especially, Atlanta, GA has 120 jobs, and 90 and 89 jobs were found at Raleigh and Charlotte from North Carolina respectively. For comparison, Hartford, CT also have 70 jobs and Hartford is one of the small cities that has a lot of very well-paid tech jobs right above the NY state.</p>
 
 <iframe src="/embeds/ratio_of_job_counts_by_city.html" width="710" height="510"></iframe>
 
 <p>It seems from the US map of job counts by city that the majority of the jobs are from big tech cities. However, breaking it down in the second box/proportion graph, it&rsquo;s obvious that the number of jobs from big tech cities is clearly below the total number of jobs in the dataset. Moreover, there&rsquo;s a significant representation of cities from red states in the rest of the dataset, demonstrated by the city names in most of the boxes on the right side of the plot.</p>
 <h2 id="-salary">💵 Salary</h2>
-<p>There&rsquo;re 143 jobs that have salary listed in total. Related fields are <code>salary_source</code>, <code>interval</code>, <code>min_amount</code> and <code>max_amount</code>. The field names are sort of arbitrary so we take a look at the first value of each field to see what they are exactly.</p>
+<p>There&rsquo;re 143 jobs that have salary listed in total. Related fields are <code>salary_source</code>, <code>interval</code>, <code>min_amount</code> and <code>max_amount</code>. The field names don&rsquo;t tell us directly what the fields are, so the following blcok print the first value of each field.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>salary_source = jobs.salary_source.dropna().tolist()
 </span></span><span style="display:flex;"><span>intervals = jobs.interval.dropna().tolist()
 </span></span><span style="display:flex;"><span>min_amount = jobs.min_amount.dropna().tolist()
@@ -285,7 +304,7 @@ Higher end of maximal amount of salary: $405.0k
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt.show()
 </span></span></code></pre></div><p><img src="/images/salary-distribution.png" alt="salary distribution"></p>
-<p>It feels like the lower end of most salary ranges between $50k - $210k and the higher end of most salary ranges from $65k to $300k. By my own job browsing experience, this is pretty accurate. Compared to most tech jobs, this actually seems a bit low (quite low). If you search for data scientist or ML Eng jobs, the higher end could easily go up to around 600k to 800k. The following analysis will show,  however, <strong>why in my opinion, backend engineering is a great first job for job seekers in this market and will likely open up further opportunities.</strong></p>
+<p>It feels like the lower end of most salary ranges between $50k - $210k and the higher end of most salary ranges from $65k to $300k. By my own job browsing experience, this is pretty accurate. Compared to most tech jobs, this actually seems a bit low (quite low). If you search for data scientist or ML Eng jobs, the higher end could easily go up to around 600k to 800k. However, I hope this reiew can show <strong>why in my opinion, backend engineering is a great first job for job seekers in this market and will likely open up further opportunities.</strong></p>
 <p><strong>P.S.</strong> If you&rsquo;re wondering why the graph is all doodles it&rsquo;s because of this magical command <code>plt.xkcd()</code>. You don&rsquo;t have to download extra packages because it&rsquo;s included in <code>matplotlib</code> but you do have to suppress the font manager warnings using <code>logging.getLogger(&quot;matplotlib.font_manager&quot;).disabled = True</code>.</p>
 <h3 id="median-minimal-and-maximal-yearly-salary-across-us-cities">Median minimal and maximal yearly salary across US cities</h3>
 <p>The code for plotting the map is similar to the above and very long just because of styling, so it&rsquo;s skipped. But the data aggregation and manipulation code is shown below.</p>
