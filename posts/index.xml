@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on </title>
-    <link>//localhost:1313/posts/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 05 Dec 2025 07:00:00 +0800</lastBuildDate>
-    <atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>📝 A Review Of Backend Engineer Jobs, Part. II</title>
-      <link>//localhost:1313/posts/2025-12-05-backend-eng-review-part2/</link>
+      <link>/posts/2025-12-05-backend-eng-review-part2/</link>
       <pubDate>Fri, 05 Dec 2025 07:00:00 +0800</pubDate>
-      <guid>//localhost:1313/posts/2025-12-05-backend-eng-review-part2/</guid>
+      <guid>/posts/2025-12-05-backend-eng-review-part2/</guid>
       <description>&lt;h2 id=&#34;-recap&#34;&gt;📌 Recap&lt;/h2&gt;&#xA;&lt;p&gt;In Part. I, I introduced why I decided to do this analysis, performed exploratory data analysis (EDA) and an analysis of median salary ranges. As a reminder, the motivation for the analysis is backend engineering is a good entry-level job for people who wants to break into the tech industry. EDA revealed that there’re a lot of backend engineering jobs in big cities like Baltimore, Washington D.C. and Chicago. Salary analysis showed that cities like Detroit, Milwaukee, Indianapolis, Birmingham and Salt Lake City have really low salary range.&lt;/p&gt;</description>
     </item>
     <item>
       <title>📝 A Review Of Backend Engineer Jobs, Part. I</title>
-      <link>//localhost:1313/posts/2025-11-25-backend-eng-review/</link>
+      <link>/posts/2025-11-25-backend-eng-review/</link>
       <pubDate>Tue, 25 Nov 2025 07:00:00 +0800</pubDate>
-      <guid>//localhost:1313/posts/2025-11-25-backend-eng-review/</guid>
+      <guid>/posts/2025-11-25-backend-eng-review/</guid>
       <description>&lt;h2 id=&#34;why-a-review-of-backend-engineering&#34;&gt;Why a review of backend engineering?&lt;/h2&gt;&#xA;&lt;p&gt;Like many people, I&amp;rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased (&lt;a href=&#34;https://www.youtube.com/watch?v=VbB9irtpoDc&#34;&gt;Is Data Science Dying? - Marina Wyss - AI &amp;amp; Machine Learning&lt;/a&gt;). Jobs like ML or AI engineer especially would require many years of experience. From stories I&amp;rsquo;ve heard, it seems like either you get an internship which would lead to a full-time job, or you get an ML-adjacent job and transfer to an ML job in the same company.&lt;/p&gt;</description>
     </item>
     <item>
       <title>too dramatic</title>
-      <link>//localhost:1313/posts/too-dramatic/</link>
+      <link>/posts/too-dramatic/</link>
       <pubDate>Mon, 17 Nov 2025 03:33:00 +0000</pubDate>
-      <guid>//localhost:1313/posts/too-dramatic/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;//localhost:1313/images/too-dramatic.png&#34; alt=&#34;too-dramatic&#34;&gt;&lt;/p&gt;</description>
+      <guid>/posts/too-dramatic/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;/images/too-dramatic.png&#34; alt=&#34;too-dramatic&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>best quotes of from my favorite BL novel (updating ✨)</title>
-      <link>//localhost:1313/posts/best-quote/</link>
+      <link>/posts/best-quote/</link>
       <pubDate>Mon, 17 Nov 2025 03:01:00 +0000</pubDate>
-      <guid>//localhost:1313/posts/best-quote/</guid>
+      <guid>/posts/best-quote/</guid>
       <description>&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;&amp;rdquo; said Feng Xin.&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;&amp;rdquo; said Mu Qing.&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;?&amp;rdquo; said Quan Yizhen.&lt;br&gt;&#xA;&amp;ldquo;Ho ho,&amp;rdquo; said Pei Ming.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;&#xA;&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“Xie Lian didn&amp;rsquo;t know whether to laugh or cry.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;&#xA;&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“If I like you, you could be a beggar and I&amp;rsquo;d still like you. If I dislike you, you could be the emperor and I&amp;rsquo;d still dislike you. Shouldn&amp;rsquo;t it be like that? It&amp;rsquo;s simple logic, so whether you&amp;rsquo;re human or not is irrelevant.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;</description>
     </item>
     <item>
       <title>strange post with custom js</title>
-      <link>//localhost:1313/posts/2020-07-06-strange-post/</link>
+      <link>/posts/2020-07-06-strange-post/</link>
       <pubDate>Mon, 06 Jul 2020 00:00:00 +0800</pubDate>
-      <guid>//localhost:1313/posts/2020-07-06-strange-post/</guid>
+      <guid>/posts/2020-07-06-strange-post/</guid>
       <description>&lt;p&gt;This post is strange. It also has some custom js.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/hanwenguo/hugo-theme-nostyleplease&#34;&gt;Masellum Author Of The Template&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
