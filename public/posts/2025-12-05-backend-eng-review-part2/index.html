@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="📌 Recap
+In Part. I, I introduced why I decided to do this analysis, performed exploratory data analysis (EDA) and an analysis of median salary ranges. As a reminder, the motivation for the analysis is backend engineering is a good entry-level job for people who wants to break into the tech industry. EDA revealed that there’re a lot of backend engineering jobs in big cities like Baltimore, Washington D.C. and Chicago. Salary analysis showed that cities like Detroit, Milwaukee, Indianapolis, Birmingham and Salt Lake City have really low salary range.">  
+
+  <title>
+    
+      📝 A Review Of Backend Engineer Jobs, Part. II
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.51652302d3a998bf7887aed5c2cf89141bbebdf45a2c8f87b0717a3cf4f51c4e53c694c328fb1de78c3a625a1c01f80745bf1f2f42c040647a245cbbb6c2d1d7.css" integrity="sha512-UWUjAtOpmL94h67Vws&#43;JFBu&#43;vfRaLI&#43;HsHF6PPT1HE5TxpTDKPsd54w6YlocAfgHRb8fL0LAQGR6JFy7tsLR1w==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">..</a>
+
+                    <p>
+                        <time datetime="2025-12-05 07:00:00 &#43;0800 &#43;0800">
+                            2025-12-05
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>📝 A Review Of Backend Engineer Jobs, Part. II</h1>
+
+    
+
+    <h2 id="-recap">📌 Recap</h2>
+<p>In Part. I, I introduced why I decided to do this analysis, performed exploratory data analysis (EDA) and an analysis of median salary ranges. As a reminder, the motivation for the analysis is backend engineering is a good entry-level job for people who wants to break into the tech industry. EDA revealed that there’re a lot of backend engineering jobs in big cities like Baltimore, Washington D.C. and Chicago. Salary analysis showed that cities like Detroit, Milwaukee, Indianapolis, Birmingham and Salt Lake City have really low salary range.</p>
+<p>In this part, I delve deeper into other parts of the datasets that might be of interests, such as job levels, companies &amp; industry, and remote jobs.</p>
+<h2 id="-job-level">🏅 Job Level</h2>
+<p>First, we import some ata scientist jobs collected from a few sampled big tech cities are used here in comparison to the backend engineering job dataset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>jobs_ds = pd.read_csv(root_dir+<span style="color:#87ceeb">&#34;jobs_ds.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;The data scientist dataset has </span><span style="color:#87ceeb">{</span>jobs_ds.shape[<span style="color:#f60">0</span>]<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> jobs. &#34;</span>)
+</span></span></code></pre></div><p>The data scientist dataset has 834 jobs.</p>
+<p>Then we can plot a bar chart separated by levels for backend engineering and data science respectively to show the relative frequency of each level.</p>
+<details>
+  <summary>Code Block: Bar chart</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Prepare data</span>
+</span></span><span style="display:flex;"><span>levels_backend = jobs.job_level
+</span></span><span style="display:flex;"><span>levels_freq_backend = levels_backend.value_counts()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>levels_ds = jobs_ds.job_level
+</span></span><span style="display:flex;"><span>levels_freq_ds = levels_ds.value_counts()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Create subplots side by side</span>
+</span></span><span style="display:flex;"><span>fig, axes = plt.subplots(<span style="color:#f60">1</span>, <span style="color:#f60">2</span>, figsize=(<span style="color:#f60">12</span>, <span style="color:#f60">5</span>))  <span style="color:#0f0"># 1 row, 2 columns</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- Backend Engineering Plot ---</span>
+</span></span><span style="display:flex;"><span>levels_freq_backend.plot(kind=<span style="color:#87ceeb">&#39;bar&#39;</span>, ax=axes[<span style="color:#f60">0</span>])
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">0</span>].set_xlabel(<span style="color:#87ceeb">&#34;Job Levels&#34;</span>)
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">0</span>].set_ylabel(<span style="color:#87ceeb">&#34;Frequency&#34;</span>)
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">0</span>].set_xticklabels(levels_freq_backend.index, rotation=<span style="color:#f60">45</span>)
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">0</span>].grid(axis=<span style="color:#87ceeb">&#39;y&#39;</span>, linestyle=<span style="color:#87ceeb">&#39;:&#39;</span>, linewidth=<span style="color:#f60">1.65</span>, color=<span style="color:#87ceeb">&#39;#333333&#39;</span>, alpha=<span style="color:#f60">0.7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Add numerical labels</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> i, value in enumerate(levels_freq_backend):
+</span></span><span style="display:flex;"><span>    axes[<span style="color:#f60">0</span>].text(i, value + <span style="color:#f60">0.05</span>, str(value), ha=<span style="color:#87ceeb">&#39;center&#39;</span>, va=<span style="color:#87ceeb">&#39;bottom&#39;</span>, fontsize=<span style="color:#f60">12</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">0</span>].set_title(<span style="color:#87ceeb">&#34;Frequently Demanded Job Levels (Backend Engineering)&#34;</span>, fontsize=<span style="color:#f60">14</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- Data Scientist Plot ---</span>
+</span></span><span style="display:flex;"><span>levels_freq_ds.plot(kind=<span style="color:#87ceeb">&#39;bar&#39;</span>, ax=axes[<span style="color:#f60">1</span>], color=<span style="color:#87ceeb">&#39;orange&#39;</span>)  <span style="color:#0f0"># optional color change</span>
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">1</span>].set_xlabel(<span style="color:#87ceeb">&#34;Job Levels&#34;</span>)
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">1</span>].set_ylabel(<span style="color:#87ceeb">&#34;Frequency&#34;</span>)
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">1</span>].set_xticklabels(levels_freq_ds.index, rotation=<span style="color:#f60">45</span>)
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">1</span>].grid(axis=<span style="color:#87ceeb">&#39;y&#39;</span>, linestyle=<span style="color:#87ceeb">&#39;:&#39;</span>, linewidth=<span style="color:#f60">1.65</span>, color=<span style="color:#87ceeb">&#39;#333333&#39;</span>, alpha=<span style="color:#f60">0.7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Add numerical labels</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> i, value in enumerate(levels_freq_ds):
+</span></span><span style="display:flex;"><span>    axes[<span style="color:#f60">1</span>].text(i, value + <span style="color:#f60">0.05</span>, str(value), ha=<span style="color:#87ceeb">&#39;center&#39;</span>, va=<span style="color:#87ceeb">&#39;bottom&#39;</span>, fontsize=<span style="color:#f60">12</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>axes[<span style="color:#f60">1</span>].set_title(<span style="color:#87ceeb">&#34;Frequently Demanded Job Levels (Data Scientist)&#34;</span>, fontsize=<span style="color:#f60">14</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.tight_layout()
+</span></span><span style="display:flex;"><span>plt.show()
+</span></span></code></pre></div>
+  </div>
+</details>
+<p><img src="/images/job_levels.png" alt="job_levels"></p>
+<p>In agreement with the common perception of the trend of job demands in the tech industry, there are more mid to senior level jobs than entry-level jobs. For the job title &ldquo;Data Scientist&rdquo;, half of the jobs in the dataset are entry-level. In comparison, about 36% percent of backend engineering jobs are entry-level jobs, which I&rsquo;d say is still pretty good.</p>
+<p>An extra consideration could be the definition of mid-senior level jobs for these two titles. Typically, people hiring for even entry-level data scientists would require a higher education degree like master&rsquo;s or PhD and proof of understanding of machine learning or deep learning concepts. However, backend engineering usually only requires a general understanding of programming, problem solving and maybe a framework like React or NextJS. It&rsquo;s much more difficult to get to mid-senior or even entry level as a data scientist compared to a backend engineer. The demand for entry-level AI engineer jobs has decreased by 10% in the past couple years, and people usually hire from the inside instead (<a href="https://www.youtube.com/watch?v=VbB9irtpoDc">Is Data Science Dying? - Marina Wyss - AI &amp; Machine Learning</a>).</p>
+<details>
+  <summary>Code Block: Data Manipulation</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># find entry and mid-senior jobs and their counts</span>
+</span></span><span style="display:flex;"><span>mid_senior_jobs = jobs[jobs[<span style="color:#87ceeb">&#34;job_level&#34;</span>] == <span style="color:#87ceeb">&#34;mid-senior level&#34;</span>]
+</span></span><span style="display:flex;"><span>entry_jobs = jobs[jobs[<span style="color:#87ceeb">&#34;job_level&#34;</span>] == <span style="color:#87ceeb">&#34;entry level&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mid_senior_counts = mid_senior_jobs.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>).size().reset_index(name=<span style="color:#87ceeb">&#34;job_count&#34;</span>)
+</span></span><span style="display:flex;"><span>entry_counts = entry_jobs.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>).size().reset_index(name=<span style="color:#87ceeb">&#34;job_count&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Merge lat/lon</span>
+</span></span><span style="display:flex;"><span>mid_senior_counts = mid_senior_counts.merge(area_counts[[<span style="color:#87ceeb">&#39;area&#39;</span>,<span style="color:#87ceeb">&#39;lat&#39;</span>,<span style="color:#87ceeb">&#39;lon&#39;</span>]], on=<span style="color:#87ceeb">&#39;area&#39;</span>, how=<span style="color:#87ceeb">&#39;left&#39;</span>)
+</span></span><span style="display:flex;"><span>entry_counts = entry_counts.merge(area_counts[[<span style="color:#87ceeb">&#39;area&#39;</span>,<span style="color:#87ceeb">&#39;lat&#39;</span>,<span style="color:#87ceeb">&#39;lon&#39;</span>]], on=<span style="color:#87ceeb">&#39;area&#39;</span>, how=<span style="color:#87ceeb">&#39;left&#39;</span>)
+</span></span></code></pre></div>
+  </div>
+</details>
+<details>
+  <summary>Code Block: Map</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Entry Level Map</span>
+</span></span><span style="display:flex;"><span>fig2 = px.scatter_geo(
+</span></span><span style="display:flex;"><span>    entry_counts,
+</span></span><span style="display:flex;"><span>    lat=<span style="color:#87ceeb">&#34;lat&#34;</span>,
+</span></span><span style="display:flex;"><span>    lon=<span style="color:#87ceeb">&#34;lon&#34;</span>,
+</span></span><span style="display:flex;"><span>    size=<span style="color:#87ceeb">&#34;job_count&#34;</span>,
+</span></span><span style="display:flex;"><span>    color=<span style="color:#87ceeb">&#34;job_count&#34;</span>,
+</span></span><span style="display:flex;"><span>    hover_name=<span style="color:#87ceeb">&#34;area&#34;</span>,
+</span></span><span style="display:flex;"><span>    size_max=<span style="color:#f60">50</span>,
+</span></span><span style="display:flex;"><span>    opacity=<span style="color:#f60">0.7</span>,
+</span></span><span style="display:flex;"><span>    color_continuous_scale=<span style="color:#87ceeb">&#34;Viridis&#34;</span>,
+</span></span><span style="display:flex;"><span>    projection=<span style="color:#87ceeb">&#34;albers usa&#34;</span>,
+</span></span><span style="display:flex;"><span>    title=<span style="color:#87ceeb">&#34;Entry Level Job Count by City&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig2.update_layout(
+</span></span><span style="display:flex;"><span>    geo=dict(
+</span></span><span style="display:flex;"><span>        scope=<span style="color:#87ceeb">&#34;usa&#34;</span>,
+</span></span><span style="display:flex;"><span>        showland=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        landcolor=<span style="color:#87ceeb">&#34;#e0e0e0&#34;</span>,
+</span></span><span style="display:flex;"><span>        lakecolor=<span style="color:#87ceeb">&#34;#d0e8ff&#34;</span>,
+</span></span><span style="display:flex;"><span>        showlakes=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        showcountries=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        countrycolor=<span style="color:#87ceeb">&#34;gray&#34;</span>,
+</span></span><span style="display:flex;"><span>        showcoastlines=<span style="color:#f00">False</span>,
+</span></span><span style="display:flex;"><span>        bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,
+</span></span><span style="display:flex;"><span>        showsubunits=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        subunitcolor=<span style="color:#87ceeb">&#34;black&#34;</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    paper_bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,
+</span></span><span style="display:flex;"><span>    height=<span style="color:#f60">600</span>,
+</span></span><span style="display:flex;"><span>    width=<span style="color:#f60">1000</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig2.show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Mid-Senior Level Map</span>
+</span></span><span style="display:flex;"><span>fig1 = px.scatter_geo(
+</span></span><span style="display:flex;"><span>    mid_senior_counts,
+</span></span><span style="display:flex;"><span>    lat=<span style="color:#87ceeb">&#34;lat&#34;</span>,
+</span></span><span style="display:flex;"><span>    lon=<span style="color:#87ceeb">&#34;lon&#34;</span>,
+</span></span><span style="display:flex;"><span>    size=<span style="color:#87ceeb">&#34;job_count&#34;</span>,
+</span></span><span style="display:flex;"><span>    color=<span style="color:#87ceeb">&#34;job_count&#34;</span>,
+</span></span><span style="display:flex;"><span>    hover_name=<span style="color:#87ceeb">&#34;area&#34;</span>,
+</span></span><span style="display:flex;"><span>    size_max=<span style="color:#f60">50</span>,
+</span></span><span style="display:flex;"><span>    opacity=<span style="color:#f60">0.7</span>,
+</span></span><span style="display:flex;"><span>    color_continuous_scale=<span style="color:#87ceeb">&#34;Viridis&#34;</span>,
+</span></span><span style="display:flex;"><span>    projection=<span style="color:#87ceeb">&#34;albers usa&#34;</span>,
+</span></span><span style="display:flex;"><span>    title=<span style="color:#87ceeb">&#34;Mid-Senior Level Job Count by City&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig1.update_layout(
+</span></span><span style="display:flex;"><span>    geo=dict(
+</span></span><span style="display:flex;"><span>        scope=<span style="color:#87ceeb">&#34;usa&#34;</span>,
+</span></span><span style="display:flex;"><span>        showland=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        landcolor=<span style="color:#87ceeb">&#34;#e0e0e0&#34;</span>,
+</span></span><span style="display:flex;"><span>        lakecolor=<span style="color:#87ceeb">&#34;#d0e8ff&#34;</span>,
+</span></span><span style="display:flex;"><span>        showlakes=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        showcountries=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        countrycolor=<span style="color:#87ceeb">&#34;gray&#34;</span>,
+</span></span><span style="display:flex;"><span>        showcoastlines=<span style="color:#f00">False</span>,
+</span></span><span style="display:flex;"><span>        bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,
+</span></span><span style="display:flex;"><span>        showsubunits=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        subunitcolor=<span style="color:#87ceeb">&#34;black&#34;</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    paper_bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,
+</span></span><span style="display:flex;"><span>    height=<span style="color:#f60">600</span>,
+</span></span><span style="display:flex;"><span>    width=<span style="color:#f60">1000</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig1.show()
+</span></span></code></pre></div>
+  </div>
+</details>
+
+<iframe src="/embeds/entry_job_map.html" width="710" height="410"></iframe>
+
+
+<iframe src="/embeds/mid_senior_job_map.html" width="710" height="410"></iframe>
+
+<p>It seems like the following cities have more entry-level jobs, ranked from the most jobs to fewer jobs:</p>
+<ul>
+<li>Seattle, WA (38)</li>
+<li>Sacramento, CA (33)</li>
+<li>Denver, CO (32)</li>
+<li>San Jose, CA (30)</li>
+<li>San Francisco, CA (28)</li>
+<li>Baltimore, MD (28)</li>
+<li>Boston, MA (25)</li>
+<li>Washington D.C., D.C. (25)</li>
+</ul>
+<p>And the following cities have more mid-senior level jobs (&gt;90): New York, NY / Baltimore, MD / Washington D.C., D.C. / Boston, MA / Denver, CO. Atlanta and Chicago each have around 70 jobs, while cities in the West Coast actually have a bit less (around 60) mid-senior jobs.</p>
+<h2 id="-companies">🏢 Companies</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># View top 10 most mentioned companies</span>
+</span></span><span style="display:flex;"><span>company_counts = jobs[<span style="color:#87ceeb">&#39;company&#39;</span>].value_counts()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>top_companies = company_counts.head(<span style="color:#f60">25</span>)
+</span></span><span style="display:flex;"><span>print(top_companies)
+</span></span></code></pre></div><pre><code>company
+Epic                         136
+Jobs via Dice                 65
+Google                        47
+PwC                           35
+ExecutivePlacements.com       34
+KPMG US                       34
+Intuit                        25
+GEICO                         25
+EY                            23
+Qualcomm                      22
+Pearson                       22
+Booz Allen Hamilton           21
+Meta                          21
+Tata Consultancy Services     19
+Uline                         18
+Mindrift                      18
+Adobe                         18
+Motion Recruitment            17
+Affirm                        17
+Capital One                   16
+Lockheed Martin               16
+Deloitte                      16
+Scribd, Inc.                  15
+Boeing                        15
+Raytheon                      15
+Name: count, dtype: int64
+</code></pre>
+<p>By getting the most mentioned companies in this dataset, we can see that Epic the electronic health record (EHR) system listed the most backend engineering jobs (136 jobs). While some suspicious job websites are up on the list, like Jobs via Dice, ExecutivePlacement.com and Motion Recruitment, most of the companies are well-known like Google, PwC, etc.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Check # of FAANG jobs</span>
+</span></span><span style="display:flex;"><span>google = company_counts[<span style="color:#87ceeb">&#34;Google&#34;</span>]
+</span></span><span style="display:flex;"><span>meta = company_counts[<span style="color:#87ceeb">&#34;Meta&#34;</span>]
+</span></span><span style="display:flex;"><span>amazon = company_counts[<span style="color:#87ceeb">&#34;Amazon&#34;</span>]
+</span></span><span style="display:flex;"><span>netflix = company_counts[<span style="color:#87ceeb">&#34;Netflix&#34;</span>]
+</span></span><span style="display:flex;"><span>apple = <span style="color:#f60">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span> <span style="color:#87ceeb">&#34;Apple&#34;</span> in company_counts.index: 
+</span></span><span style="display:flex;"><span>    apple = company_counts[<span style="color:#87ceeb">&#34;Apple&#34;</span>]
+</span></span><span style="display:flex;"><span>print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;# of FANNG jobs </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">Google: </span><span style="color:#87ceeb">{</span>google<span style="color:#87ceeb">}</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">Meta: </span><span style="color:#87ceeb">{</span>meta<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">Amazon: </span><span style="color:#87ceeb">{</span>amazon<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">Netflix: </span><span style="color:#87ceeb">{</span>netflix<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> </span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">Apple: </span><span style="color:#87ceeb">{</span>apple<span style="color:#87ceeb">}</span><span style="color:#87ceeb">&#34;</span>)
+</span></span></code></pre></div><pre><code># of FANNG jobs 
+Google: 47
+Meta: 21 
+Amazon: 1 
+Netflix: 14 
+Apple: 0
+</code></pre>
+<p>A quick check people like to do is to look for FAANG company jobs. FAANG are five big tech companies recognized in the industry, standing for Facebook (now Meta), Amazon, Apple, Netflix, and Alphabet (Google) respectively. Here we have Google: 47 jobs, Meta: 21 jobs, Amazon: 1 job and Netflix: 14 jobs. Apple has no job listed, just because they don&rsquo;t post ANY job on ANY job boards and only on their own career website, so it&rsquo;s normal that our dataset doesn&rsquo;t contain any job from Apple. Our job source is LinkedIn.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Plot WordCloud of Companies</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">from</span> wordcloud <span style="color:#f00">import</span> WordCloud
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># List of companies to remove</span>
+</span></span><span style="display:flex;"><span>remove_companies = [<span style="color:#87ceeb">&#34;Jobs via Dice&#34;</span>, <span style="color:#87ceeb">&#34;ExecutivePlacements.com&#34;</span>, <span style="color:#87ceeb">&#34;Motion Recruitment&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Filter out these companies from the frequency dictionary</span>
+</span></span><span style="display:flex;"><span>company_freq_filtered = {company: count <span style="color:#f00">for</span> company, count in company_counts.items() <span style="color:#f00">if</span> company not in remove_companies}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Generate the word cloud from the filtered dictionary</span>
+</span></span><span style="display:flex;"><span>wordcloud = WordCloud(
+</span></span><span style="display:flex;"><span>    width=<span style="color:#f60">800</span>,
+</span></span><span style="display:flex;"><span>    height=<span style="color:#f60">400</span>,
+</span></span><span style="display:flex;"><span>    background_color=<span style="color:#87ceeb">&#39;white&#39;</span>,
+</span></span><span style="display:flex;"><span>    colormap=<span style="color:#87ceeb">&#39;viridis&#39;</span>
+</span></span><span style="display:flex;"><span>).generate_from_frequencies(company_freq_filtered)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Plot</span>
+</span></span><span style="display:flex;"><span>plt.figure(figsize=(<span style="color:#f60">15</span>, <span style="color:#f60">7</span>))
+</span></span><span style="display:flex;"><span>plt.imshow(wordcloud, interpolation=<span style="color:#87ceeb">&#39;bilinear&#39;</span>)
+</span></span><span style="display:flex;"><span>plt.axis(<span style="color:#87ceeb">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>plt.title(<span style="color:#87ceeb">&#34;Most Mentioned Companies&#34;</span>, fontsize=<span style="color:#f60">24</span>, font=<span style="color:#87ceeb">&#34;DejaVu Sans&#34;</span>)
+</span></span><span style="display:flex;"><span>plt.show()
+</span></span></code></pre></div><p><img src="/images/company_wordcloud.png" alt="wordcloud"></p>
+<p>Some of the well-known companies that&rsquo;re on the list are: KPMG US, EY, Intuit, PwC, Qualcomm, Tata Consultancy Services, Booz Allen Hamilton, Affirm, Pearson, GEICO, and companies with less backend engineering jobs like Adobe, IBM, Lockheed Martin, Deloitte, NVIDIA and Boeing.</p>
+<h2 id="-industry">🏭 Industry</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>industry = jobs.company_industry
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># List of companies to remove</span>
+</span></span><span style="display:flex;"><span>remove_companies = [<span style="color:#87ceeb">&#34;Jobs via Dice&#34;</span>, <span style="color:#87ceeb">&#34;ExecutivePlacements.com&#34;</span>, <span style="color:#87ceeb">&#34;Motion Recruitment&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Filter the jobs dataframe to exclude these companies</span>
+</span></span><span style="display:flex;"><span>jobs_filtered = jobs[~jobs[<span style="color:#87ceeb">&#39;company&#39;</span>].isin(remove_companies)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>industry_counts = jobs_filtered[<span style="color:#87ceeb">&#39;company_industry&#39;</span>].value_counts()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Get top 10 most frequent industries</span>
+</span></span><span style="display:flex;"><span>top_industries = industry_counts.head(<span style="color:#f60">7</span>)
+</span></span><span style="display:flex;"><span>print(top_industries)
+</span></span></code></pre></div><pre><code>company_industry
+Software Development                                         486
+IT Services and IT Consulting                                353
+Financial Services                                           217
+Technology, Information and Internet                         151
+Defense and Space Manufacturing                              117
+Insurance                                                     79
+Hospitals and Health Care and Information Technology          68
+</code></pre>
+<details>
+  <summary>Code Block: Bar chart</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Convert top_industries to a dataframe for easier manipulation</span>
+</span></span><span style="display:flex;"><span>top_industries_df = top_industries.reset_index()
+</span></span><span style="display:flex;"><span>top_industries_df.columns = [<span style="color:#87ceeb">&#39;industry&#39;</span>, <span style="color:#87ceeb">&#39;count&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Rename the 7th industry (index 6) to &#34;Hospitals and Health Care Software&#34;</span>
+</span></span><span style="display:flex;"><span>top_industries_df.loc[<span style="color:#f60">6</span>, <span style="color:#87ceeb">&#39;industry&#39;</span>] = <span style="color:#87ceeb">&#34;Hospitals and Health Care Software&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Plot as bar chart</span>
+</span></span><span style="display:flex;"><span>plt.figure(figsize=(<span style="color:#f60">10</span>,<span style="color:#f60">6</span>))
+</span></span><span style="display:flex;"><span>bars = plt.bar(top_industries_df[<span style="color:#87ceeb">&#39;industry&#39;</span>], top_industries_df[<span style="color:#87ceeb">&#39;count&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Add text labels on top of each bar</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> bar in bars:
+</span></span><span style="display:flex;"><span>    height = bar.get_height()
+</span></span><span style="display:flex;"><span>    plt.text(
+</span></span><span style="display:flex;"><span>        bar.get_x() + bar.get_width()/<span style="color:#f60">2</span>,  <span style="color:#0f0"># x-position</span>
+</span></span><span style="display:flex;"><span>        height + <span style="color:#f60">0.5</span>,                     <span style="color:#0f0"># y-position slightly above bar</span>
+</span></span><span style="display:flex;"><span>        str(int(height)),                  <span style="color:#0f0"># label text</span>
+</span></span><span style="display:flex;"><span>        ha=<span style="color:#87ceeb">&#39;center&#39;</span>, va=<span style="color:#87ceeb">&#39;bottom&#39;</span>, fontsize=<span style="color:#f60">12</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.xticks(fontsize=<span style="color:#f60">12</span>)
+</span></span><span style="display:flex;"><span>plt.xlabel(<span style="color:#87ceeb">&#34;Industry&#34;</span>)
+</span></span><span style="display:flex;"><span>plt.ylabel(<span style="color:#87ceeb">&#34;Number of Job Postings&#34;</span>)
+</span></span><span style="display:flex;"><span>plt.title(<span style="color:#87ceeb">&#34;Top 7 Most Frequent Industries&#34;</span>)
+</span></span><span style="display:flex;"><span>plt.xticks(rotation=<span style="color:#f60">45</span>, ha=<span style="color:#87ceeb">&#39;right&#39;</span>, fontsize=<span style="color:#f60">12</span>)
+</span></span><span style="display:flex;"><span>plt.grid(axis=<span style="color:#87ceeb">&#39;y&#39;</span>, linestyle=<span style="color:#87ceeb">&#39;:&#39;</span>, linewidth=<span style="color:#f60">1.65</span>, color=<span style="color:#87ceeb">&#39;#333333&#39;</span>, alpha=<span style="color:#f60">0.7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.show()
+</span></span></code></pre></div>
+  </div>
+</details>
+<p><img src="/images/freq_industry.png" alt="industry"></p>
+<p>Most jobs are from the software development, consulting or financial services industry. Other more specific industries are Defense and Space Manufacturing, Insurance and Healthcare Software. Some examples of software development industry companies could be Slack, Pearson and Scribd, Inc. Consulting companies are straightforward, like EY and PwC. Financial services companies include Affirm, Intuit and Capital One.</p>
+<h2 id="-is-remote">🌐 Is Remote</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Count remote jobs</span>
+</span></span><span style="display:flex;"><span>is_remote = jobs_filtered.is_remote
+</span></span><span style="display:flex;"><span>remote_counts = jobs[<span style="color:#87ceeb">&#39;is_remote&#39;</span>].value_counts()
+</span></span><span style="display:flex;"><span>print(remote_counts)
+</span></span></code></pre></div><pre><code>is_remote
+False    2322
+True      738
+</code></pre>
+<p>It&rsquo;s clear that a bit less than a quater of the jobs is remote, which is a good amount. To better visualize this, let&rsquo;s do a pie chart.</p>
+<details>
+  <summary>Additional Notes</summary>
+  <div style="margin-top: 10px;">
+    Pie chart is widely criticized and avoided in the visualization community. It&rsquo;s well-known that if you want to visualize the ratios of data, a pie chart won&rsquo;t give an accurate presentation <a href="https://www.tableau.com/blog/5-unusual-alternatives-pie-charts">(&ldquo;5 alternatives to pie chart - Shelby Temple&rdquo;)</a>. However, it&rsquo;s kinda perfect in this case because it&rsquo;s almost exactly a quater, so I thought it&rsquo;d be funny to finally be able to use it once.
+  </div>
+</details>
+<details>
+  <summary>Code Block: Pie chart (horrific)</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Count remote vs non-remote jobs</span>
+</span></span><span style="display:flex;"><span>remote_counts = jobs_filtered[<span style="color:#87ceeb">&#39;is_remote&#39;</span>].value_counts()
+</span></span><span style="display:flex;"><span>labels = [<span style="color:#87ceeb">&#39;Non-Remote&#39;</span>, <span style="color:#87ceeb">&#39;Remote&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Custom function to show both count and percentage</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">def</span> <span style="color:#ff0">make_autopct</span>(values):
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">def</span> <span style="color:#ff0">my_autopct</span>(pct):
+</span></span><span style="display:flex;"><span>        total = sum(values)
+</span></span><span style="display:flex;"><span>        count = int(round(pct*total/<span style="color:#f60">100.0</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">return</span> <span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;</span><span style="color:#87ceeb">{</span>count<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> (</span><span style="color:#87ceeb">{</span>pct<span style="color:#87ceeb">:</span><span style="color:#87ceeb">.1f</span><span style="color:#87ceeb">}</span><span style="color:#87ceeb">%)&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> my_autopct
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt.figure(figsize=(<span style="color:#f60">6</span>,<span style="color:#f60">6</span>))
+</span></span><span style="display:flex;"><span>plt.pie(
+</span></span><span style="display:flex;"><span>    remote_counts,
+</span></span><span style="display:flex;"><span>    labels=labels,
+</span></span><span style="display:flex;"><span>    autopct=make_autopct(remote_counts),
+</span></span><span style="display:flex;"><span>    colors=[<span style="color:#87ceeb">&#39;#FF9999&#39;</span>,<span style="color:#87ceeb">&#39;#66B3FF&#39;</span>],
+</span></span><span style="display:flex;"><span>    startangle=<span style="color:#f60">90</span>,
+</span></span><span style="display:flex;"><span>    shadow=<span style="color:#f00">True</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>plt.title(<span style="color:#87ceeb">&#34;Proportion of Remote vs Non-Remote Jobs&#34;</span>, fontsize=<span style="color:#f60">14</span>)
+</span></span><span style="display:flex;"><span>plt.show()
+</span></span></code></pre></div>
+  </div>
+</details>
+<p><img src="/images/remote_jobs.png" alt="remote jobs"></p>
+<p>The quater ratio is pretty clear based on this chart. The next step could be to visualize remote jobs by area.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Filter remote jobs</span>
+</span></span><span style="display:flex;"><span>remote_jobs = jobs_filtered[jobs_filtered[<span style="color:#87ceeb">&#39;is_remote&#39;</span>] == <span style="color:#f00">True</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Group by area/city and count jobs</span>
+</span></span><span style="display:flex;"><span>remote_counts = remote_jobs.groupby(<span style="color:#87ceeb">&#34;area&#34;</span>).size().reset_index(name=<span style="color:#87ceeb">&#34;job_count&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Merge lat/lon for plotting (assuming area_counts dataframe exists)</span>
+</span></span><span style="display:flex;"><span>remote_counts = remote_counts.merge(area_counts[[<span style="color:#87ceeb">&#39;area&#39;</span>,<span style="color:#87ceeb">&#39;lat&#39;</span>,<span style="color:#87ceeb">&#39;lon&#39;</span>]], on=<span style="color:#87ceeb">&#39;area&#39;</span>, how=<span style="color:#87ceeb">&#39;left&#39;</span>)
+</span></span></code></pre></div><details>
+  <summary>Code Block: Map</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fig = px.scatter_geo(
+</span></span><span style="display:flex;"><span>    remote_counts,
+</span></span><span style="display:flex;"><span>    lat=<span style="color:#87ceeb">&#34;lat&#34;</span>,
+</span></span><span style="display:flex;"><span>    lon=<span style="color:#87ceeb">&#34;lon&#34;</span>,
+</span></span><span style="display:flex;"><span>    size=<span style="color:#87ceeb">&#34;job_count&#34;</span>,
+</span></span><span style="display:flex;"><span>    color=<span style="color:#87ceeb">&#34;job_count&#34;</span>,
+</span></span><span style="display:flex;"><span>    hover_name=<span style="color:#87ceeb">&#34;area&#34;</span>,
+</span></span><span style="display:flex;"><span>    size_max=<span style="color:#f60">50</span>,
+</span></span><span style="display:flex;"><span>    opacity=<span style="color:#f60">0.7</span>,
+</span></span><span style="display:flex;"><span>    color_continuous_scale=<span style="color:#87ceeb">&#34;Viridis&#34;</span>,
+</span></span><span style="display:flex;"><span>    projection=<span style="color:#87ceeb">&#34;albers usa&#34;</span>,
+</span></span><span style="display:flex;"><span>    title=<span style="color:#87ceeb">&#34;Remote Job Count by City&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Map layout styling</span>
+</span></span><span style="display:flex;"><span>fig.update_layout(
+</span></span><span style="display:flex;"><span>    geo=dict(
+</span></span><span style="display:flex;"><span>        scope=<span style="color:#87ceeb">&#34;usa&#34;</span>,
+</span></span><span style="display:flex;"><span>        showland=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        landcolor=<span style="color:#87ceeb">&#34;#e0e0e0&#34;</span>,
+</span></span><span style="display:flex;"><span>        lakecolor=<span style="color:#87ceeb">&#34;#d0e8ff&#34;</span>,
+</span></span><span style="display:flex;"><span>        showlakes=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        showcountries=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        countrycolor=<span style="color:#87ceeb">&#34;gray&#34;</span>,
+</span></span><span style="display:flex;"><span>        showcoastlines=<span style="color:#f00">False</span>,
+</span></span><span style="display:flex;"><span>        bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,
+</span></span><span style="display:flex;"><span>        showsubunits=<span style="color:#f00">True</span>,
+</span></span><span style="display:flex;"><span>        subunitcolor=<span style="color:#87ceeb">&#34;black&#34;</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    paper_bgcolor=<span style="color:#87ceeb">&#34;#f5f5f5&#34;</span>,
+</span></span><span style="display:flex;"><span>    height=<span style="color:#f60">600</span>,
+</span></span><span style="display:flex;"><span>    width=<span style="color:#f60">1000</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig.show()
+</span></span></code></pre></div>
+  </div>
+</details>
+
+<iframe src="/embeds/remote_job_map.html" width="710" height="510"></iframe>
+
+<p>Separating remote jobs by city, the map shows that Denver (50), Baltimore (43), Washington DC (36), Boston, New York and Chicago. All of them have more than 30 remote jobs. Atlanta and Raleigh don&rsquo;t have as much but still a decent amount (29 jobs and 26 jobs, respectively).</p>
+<p>It&rsquo;s interesting from all of the above analysis, traditionally well-regarded big tech cities like San Francisco and Seattle are seldom mentioned. Aside from the fact that those California cities have well-paid jobs, it seems like New York, Denver, Baltimore, Washington DC, Boston, Chicago, Atlanta and Raleigh have comparably well-paid jobs that are entry, mid-senior level and remote. One more signal to look for yourself could be which city have which industry. This is too detailed for this review, but the dataset of all jobs, as well as by city and the sampled data scientist dataset will be uploaded to Kaggle and available for download. <a href="https://www.kaggle.com/datasets/tianyimasf/backend-engineer-jobs-us">(data)</a></p>
+<hr>
+<p>This concludes Part. II of my review of backend engineering job.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

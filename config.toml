@@ -3,6 +3,11 @@
     extended = true
     min      = "0.41.0"
 
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.parser]
