@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="📌 Recap
+Part. I &amp; II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts about sections, skills keywords, key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing).
+🧾 Description
+Each job description would have an about section, a skill section, a responsibility section and a benefit section. We write a suite of functions to heuristically extract these sections and key words and phrases. In the end, we build a dictionary of info from each job description.">  
+
+  <title>
+    
+      📝 A Review Of Backend Engineer Jobs, Part. III
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.900100e9dbee2d56c58fac8bb717037cae7e26a9c36c29d2ff587bdd65f0cbbe510b41d81a3bb234919cdfdc7550d786b2fab70c8fc507772d732fe097106d12.css" integrity="sha512-kAEA6dvuLVbFj6yLtxcDfK5&#43;JqnDbCnS/1h73WXwy75RC0HYGjuyNJGc39x1UNeGsvq3DI/FB3ctcy/glxBtEg==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">..</a>
+
+                    <p>
+                        <time datetime="2025-01-05 07:00:00 &#43;0800 &#43;0800">
+                            2025-01-05
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>📝 A Review Of Backend Engineer Jobs, Part. III</h1>
+
+    
+
+    <h2 id="-recap">📌 Recap</h2>
+<p>Part. I &amp; II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts about sections, skills keywords, key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing).</p>
+<h2 id="-description">🧾 Description</h2>
+<p>Each job description would have an about section, a skill section, a responsibility section and a benefit section. We write a suite of functions to heuristically extract these sections and key words and phrases. In the end, we build a dictionary of info from each job description.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Utility function: extract job info</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">def</span> <span style="color:#ff0">extract_sections_for_description</span>(description):
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># get sections as text strings</span>
+</span></span><span style="display:flex;"><span>    about = extract_about_section(description)
+</span></span><span style="display:flex;"><span>    responsibility, requirements, benefits = extract_job_info(description)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    skills = []
+</span></span><span style="display:flex;"><span>    key_phrases_exp = []
+</span></span><span style="display:flex;"><span>    key_phrases_bg = []
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># extract skills and key responsibility phrases</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">for</span> r in responsibility:
+</span></span><span style="display:flex;"><span>        skills_r = list(extract_skills(r))
+</span></span><span style="display:flex;"><span>        skills.extend(skills_r)
+</span></span><span style="display:flex;"><span>        key_phrases_r_exp = extract_phrases(r, level_experience)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_exp: key_phrases_exp.extend(key_phrases_r_exp)
+</span></span><span style="display:flex;"><span>        key_phrases_r_bg = extract_phrases(r, level_background)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_bg: key_phrases_bg.extend(key_phrases_r_bg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># extract skills and key resquirements phrases</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">for</span> req in requirements:
+</span></span><span style="display:flex;"><span>        skills_r = list(extract_skills(req))
+</span></span><span style="display:flex;"><span>        skills.extend(skills_r)
+</span></span><span style="display:flex;"><span>        key_phrases_r_exp = extract_phrases(req, level_experience)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_exp: key_phrases_exp.extend(key_phrases_r_exp)
+</span></span><span style="display:flex;"><span>        key_phrases_r_bg = extract_phrases(r, level_background)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_bg: key_phrases_bg.extend(key_phrases_r_bg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># extract bullet points of benefits</span>
+</span></span><span style="display:flex;"><span>    benefits = get_benefits(benefits)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># return about sections, key words and phrases, bullet points</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> about, skills, key_phrases_exp, key_phrases_bg, benefits
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- extract info from description ---</span>
+</span></span><span style="display:flex;"><span>data = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> desc in jobs.description:
+</span></span><span style="display:flex;"><span>    a, s, kph_exp, kph_bg, b = extract_sections_for_description(desc)
+</span></span><span style="display:flex;"><span>    res = {
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;about&#34;</span>: a,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;skills&#34;</span>: s,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;key_phrases_exp&#34;</span>: kph_exp,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;key_phrases_bg&#34;</span>: kph_bg,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;benefits&#34;</span>: b,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    data.append(res)
+</span></span></code></pre></div><h3 id="about-sections">About Sections</h3>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>
