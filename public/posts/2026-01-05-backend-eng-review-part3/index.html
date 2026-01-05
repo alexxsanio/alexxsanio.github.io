@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="📌 Recap
+Part. I &amp; II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts about sections, skills keywords, key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing).
+🧾 Job Description
+Each job description would have an about section, a skill section, a responsibility section and a benefit section. We write a suite of functions to heuristically extract these sections and key words and phrases. In the end, we build a dictionary of info from each job description.">  
+
+  <title>
+    
+      📝 A Review Of Backend Engineer Jobs, Part. III
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.900100e9dbee2d56c58fac8bb717037cae7e26a9c36c29d2ff587bdd65f0cbbe510b41d81a3bb234919cdfdc7550d786b2fab70c8fc507772d732fe097106d12.css" integrity="sha512-kAEA6dvuLVbFj6yLtxcDfK5&#43;JqnDbCnS/1h73WXwy75RC0HYGjuyNJGc39x1UNeGsvq3DI/FB3ctcy/glxBtEg==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">..</a>
+
+                    <p>
+                        <time datetime="2026-01-05 07:00:00 &#43;0800 &#43;0800">
+                            2026-01-05
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>📝 A Review Of Backend Engineer Jobs, Part. III</h1>
+
+    
+
+    <h2 id="-recap">📌 Recap</h2>
+<p>Part. I &amp; II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts about sections, skills keywords, key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing).</p>
+<h2 id="-job-description">🧾 Job Description</h2>
+<p>Each job description would have an about section, a skill section, a responsibility section and a benefit section. We write a suite of functions to heuristically extract these sections and key words and phrases. In the end, we build a dictionary of info from each job description.</p>
+<details>
+  <summary>Code Block: Putting it all together</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Utility function: extract job info</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">def</span> <span style="color:#ff0">extract_sections_for_description</span>(description):
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># get sections as text strings</span>
+</span></span><span style="display:flex;"><span>    about = extract_about_section(description)
+</span></span><span style="display:flex;"><span>    responsibility, requirements, benefits = extract_job_info(description)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    skills = []
+</span></span><span style="display:flex;"><span>    key_phrases_exp = []
+</span></span><span style="display:flex;"><span>    key_phrases_bg = []
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># extract skills and key responsibility phrases</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">for</span> r in responsibility:
+</span></span><span style="display:flex;"><span>        skills_r = list(extract_skills(r))
+</span></span><span style="display:flex;"><span>        skills.extend(skills_r)
+</span></span><span style="display:flex;"><span>        key_phrases_r_exp = extract_phrases(r, level_experience)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_exp: key_phrases_exp.extend(key_phrases_r_exp)
+</span></span><span style="display:flex;"><span>        key_phrases_r_bg = extract_phrases(r, level_background)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_bg: key_phrases_bg.extend(key_phrases_r_bg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># extract skills and key resquirements phrases</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">for</span> req in requirements:
+</span></span><span style="display:flex;"><span>        skills_r = list(extract_skills(req))
+</span></span><span style="display:flex;"><span>        skills.extend(skills_r)
+</span></span><span style="display:flex;"><span>        key_phrases_r_exp = extract_phrases(req, level_experience)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_exp: key_phrases_exp.extend(key_phrases_r_exp)
+</span></span><span style="display:flex;"><span>        key_phrases_r_bg = extract_phrases(r, level_background)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> key_phrases_r_bg: key_phrases_bg.extend(key_phrases_r_bg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># extract bullet points of benefits</span>
+</span></span><span style="display:flex;"><span>    benefits = get_benefits(benefits)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># return about sections, key words and phrases, bullet points</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> about, skills, key_phrases_exp, key_phrases_bg, benefits
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- extract info from description ---</span>
+</span></span><span style="display:flex;"><span>data = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> desc in jobs.description:
+</span></span><span style="display:flex;"><span>    a, s, kph_exp, kph_bg, b = extract_sections_for_description(desc)
+</span></span><span style="display:flex;"><span>    res = {
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;about&#34;</span>: a,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;skills&#34;</span>: s,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;key_phrases_exp&#34;</span>: kph_exp,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;key_phrases_bg&#34;</span>: kph_bg,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;benefits&#34;</span>: b,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    data.append(res)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Save data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">with</span> open(<span style="color:#87ceeb">&#34;data.json&#34;</span>, <span style="color:#87ceeb">&#34;w&#34;</span>) <span style="color:#f00">as</span> f:
+</span></span><span style="display:flex;"><span>    json.dump(data, f, indent=<span style="color:#f60">2</span>)
+</span></span></code></pre></div>
+  </div>
+</details>
+<h3 id="about-section">About Section</h3>
+<p>For every about section extracted, it&rsquo;s converted to a document vector and then clustered using KMeans. Each vector with dimension 364 is then reduced to 3d vectors using t-SNE (<a href="https://www.datacamp.com/tutorial/introduction-t-sne">Introduction to t-SNE - datacamp</a>). The 3d vectors are visualized in 3d space color-coded with their respective cluster and labeled with the original text when hovered.</p>
+
+<iframe src="/embeds/about_clusters.html" width="710" height="610"></iframe>
+
+<p>It doesn&rsquo;t feel like the clusters mean a lot. To further validate (or invalidate) this observation, we can sample the cluster of about sections and summarize each sample. The results are below:</p>
+<p>Group 0 of about sections seem to be about introducing the mission of the company.</p>
+<details>
+  <summary>Summary: Group 0</summary>
+  <div style="margin-top: 10px;">
+    Akraya is an award-winning IT staffing firm consistently recognized for its commitment to excellence and a thriving work environment . At Ford Motor Company, we believe freedom of movement drives human progress . At Scribd (pronounced “scribbed”), our mission is to spark human curiosity . At Sherwin-Williams, our purpose is to inspire and improve the world by coloring and protecting what matters . At Recidiviz is creating safer, healthier communities by improving outcomes for people in the criminal justice system . At Gusto, we&rsquo;re on a mission to grow the small business economy . At Bridge, we offer &ldquo;Culture Conversations Conversations&rdquo; to help you gain insights into our culture . All your information will be kept confidential according to EEO guidelines .
+  </div>
+</details>
+<p>Group 1 of about sections seem to be about introducing the position itself.</p>
+<details>
+  <summary>Summary: Group 1</summary>
+  <div style="margin-top: 10px;">
+    The Product Engineering Intern will join Lumafield’s Product team to prototype and ship experimental software that brings 3D data to life . The ByteDance Doubao (Seed) Team, is dedicated to pioneering advanced AI foundation models . The salary range listed and paragraph are only applicable to U.S.-based candidates . The position will be performed alongside a cohort of summer interns and is a paid position . We do not currently offer visa sponsorship or OPT eligibility . We encourage you to apply anyway – If you&rsquo;re excited about our technology, the opportunity, and are eager to learn more we’d love to hear from you! Etched  Ergo turns every customer conversation—across Zoom, email, Slack, and phone
+  </div>
+</details>
+<p>Group 2 of about sections seem to be different from Group 1 because Group 1 introduces more relaxed positions with a focus on benefits, while Group 2 of about sections introduces positions that has much higher and more specific requirements for the candidate, mentioning technical terms like &ldquo;distributed computing&rdquo;, &ldquo;large-scale system design&rdquo; and &ldquo;building a product experience&rdquo; which are all requirements for higher level engineer positions.</p>
+<details>
+  <summary>Summary: Group 2</summary>
+  <div style="margin-top: 10px;">
+    The US base salary range for this full-time position is $113,000-$161,000 . The ERP Application Product Specialist will be responsible for managing our Vista and Vista Web systems . Netflix is looking for engineers who bring fresh ideas from all areas, including information retrieval, distributed computing,. large-scale system design, networking and data storage,. natural language processing, UI design and mobile . The SWT Team builds internal tooling that builds how our developers build, maintain, and test Netflix products . You’re not just writing backend code, you&rsquo;re building a product experience you believe in . You&rsquo;re passionate about observability, reliability, performance and ensuring these are understood by everyone on the team as it relates to our backend systems .
+  </div>
+</details>
+<p>Group 3 mentioned data engineering and have a large stress on benefits as well.</p>
+<details>
+  <summary>Summary: Group 3</summary>
+  <div style="margin-top: 10px;">
+    As a Data Engineer, you will monitor the measurement, audience and data products by developing Key Performance Indicators (KPIs), data pipelines, dashboards, and doing ad-hoc analysis to derive insights and opportunities . SRC offers a generous benefit package, including medical, dental, vision, 401(k) with a company match, life insurance, vacation and sick paid time off accruals starting at 10 days of vacation and 5 days of sick leave annually, 11 paid holidays, tuition reimbursement, and tuition reimbursement . Netflix has a unique culture and environment. We do not discriminate on the basis of race, religion, color, . For more information: <a href="http://www.dailymailonline.com/news/business//">http://www.dailymailonline.com/news/business//</a>
+  </div>
+</details>
+<p>Group 4 orients more towards govenemental employers, boundaries and restrictions.</p>
+<details>
+  <summary>Summary: Group 4</summary>
+  <div style="margin-top: 10px;">
+    Medtronic will consider for employment qualified job applicants with arrest or conviction records in accordance with the Los Angeles County Fair Chance Ordinance for Employers and the California Fair Chance Act . Cintel, Inc. expressly prohibits any form of unlawful employee harassment or discrimination based on any of the characteristics mentioned above . Alaska is not a state, but a state or state, or state of the United States, with jurisdiction in Washington DC or Alaska . Puerto Rico is one of the U.S. Virgin Islands and Alaska is a state of origin in the state of Washington, D.C., Alaska, Alaska, New England, Delaware and Delaware . The state of Puerto Rico has jurisdiction in Puerto Rico, Alaska and Hawaii . The U.N. has jurisdiction for Puerto
+  </div>
+</details>
+<p>Similar to Group 4, Group 5 focuses on state, space and defense agencies.</p>
+<details>
+  <summary>Summary: Group 5</summary>
+  <div style="margin-top: 10px;">
+    Capella Space is a pioneer in Synthetic Aperture Radar (SAR) satellite technology and space-based signal intelligence . Capella is charting the future of Earth observation . InVita Healthcare Technologies is a leading software provider for complex medical, forensics, and community care environments . The posting will remain active until the position is filled, or a qualified pool of candidates is identified . The South Carolina Law Enforcement Division (SLED) is a premier statewide law enforcement agency dedicated to serving and protecting the citizens of South Carolina . The position will remain open for up to five days, with the posting being posted for as many as five days . BAE Systems, Inc. is an equal opportunity employer and will consider all applications without regard to race, sex, age, color,
+  </div>
+</details>
+<p>Group 6 has a distinct focus on companies that have ambitious mission statements to better the wrold, using words like &ldquo;the world&rdquo;, &ldquo;of all&rdquo;.</p>
+<details>
+  <summary>Summary: Group 6</summary>
+  <div style="margin-top: 10px;">
+    The group says they embrace responsibility to change the way the world is now and that it will be better for all in the future . They say they want the change to be more equitable, safe and for the future of all of the world . We want to lead change that makes our world safer, safer, more equitable and more for all, not just for the sake of all, but for the benefit of all . Our vision is a world with Zero Crashes, Zero Emissions and Zero Congestion and we embrace the responsibility to lead the change that will make our world better, safer and more equitable for all . We embrace responsibility for the change we want to make the world better and safer for all for all. We are committed to leading
+  </div>
+</details>
+<details>
+  <summary>Code Block: Summarization using Hugging Face Transformer and Pipeline</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Library imports</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">from</span> transformers <span style="color:#f00">import</span> pipeline, AutoTokenizer
+</span></span><span style="display:flex;"><span><span style="color:#f00">import</span> random
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- define models --- </span>
+</span></span><span style="display:flex;"><span>MODEL_NAME = <span style="color:#87ceeb">&#34;sshleifer/distilbart-cnn-12-6&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>summarizer = pipeline(
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;summarization&#34;</span>,
+</span></span><span style="display:flex;"><span>    model=MODEL_NAME,
+</span></span><span style="display:flex;"><span>    tokenizer=tokenizer
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- utility functions ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Chunk texts for faster processing speed</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">def</span> <span style="color:#ff0">chunk_text_by_tokens</span>(text, tokenizer, max_tokens=<span style="color:#f60">900</span>):
+</span></span><span style="display:flex;"><span>    tokens = tokenizer.encode(text, add_special_tokens=<span style="color:#f00">False</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> [
+</span></span><span style="display:flex;"><span>        tokenizer.decode(tokens[i:i + max_tokens], skip_special_tokens=<span style="color:#f00">True</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">for</span> i in range(<span style="color:#f60">0</span>, len(tokens), max_tokens)
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Summarize individual texts</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">def</span> <span style="color:#ff0">summarize_text_safe</span>(
+</span></span><span style="display:flex;"><span>    text,
+</span></span><span style="display:flex;"><span>    tokenizer,
+</span></span><span style="display:flex;"><span>    summarizer,
+</span></span><span style="display:flex;"><span>    max_tokens=<span style="color:#f60">900</span>,
+</span></span><span style="display:flex;"><span>    max_length=<span style="color:#f60">400</span>,
+</span></span><span style="display:flex;"><span>    min_length=<span style="color:#f60">150</span>
+</span></span><span style="display:flex;"><span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># Step 1: chunk original text</span>
+</span></span><span style="display:flex;"><span>    chunks = chunk_text_by_tokens(text, tokenizer, max_tokens)
+</span></span><span style="display:flex;"><span>    summaries = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">for</span> chunk in tqdm(chunks, desc=<span style="color:#87ceeb">&#34;Summarizing chunks&#34;</span>, leave=<span style="color:#f00">False</span>):
+</span></span><span style="display:flex;"><span>        result = summarizer(
+</span></span><span style="display:flex;"><span>            chunk,
+</span></span><span style="display:flex;"><span>            max_length=max_length,
+</span></span><span style="display:flex;"><span>            min_length=min_length,
+</span></span><span style="display:flex;"><span>            do_sample=<span style="color:#f00">False</span>
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        summaries.append(result[<span style="color:#f60">0</span>][<span style="color:#87ceeb">&#34;summary_text&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># Step 2: if combined summaries are still too large, recurse</span>
+</span></span><span style="display:flex;"><span>    combined = <span style="color:#87ceeb">&#34; &#34;</span>.join(summaries)
+</span></span><span style="display:flex;"><span>    combined_tokens = len(tokenizer.encode(combined, add_special_tokens=<span style="color:#f00">False</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> combined_tokens &gt; max_tokens:
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0"># 🔁 recursively summarize summaries</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">return</span> summarize_text_safe(
+</span></span><span style="display:flex;"><span>            combined,
+</span></span><span style="display:flex;"><span>            tokenizer,
+</span></span><span style="display:flex;"><span>            summarizer,
+</span></span><span style="display:flex;"><span>            max_tokens=max_tokens,
+</span></span><span style="display:flex;"><span>            max_length=max_length,
+</span></span><span style="display:flex;"><span>            min_length=min_length
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># Step 3: final safe summary</span>
+</span></span><span style="display:flex;"><span>    final = summarizer(
+</span></span><span style="display:flex;"><span>        combined,
+</span></span><span style="display:flex;"><span>        max_length=max_length,
+</span></span><span style="display:flex;"><span>        min_length=min_length,
+</span></span><span style="display:flex;"><span>        do_sample=<span style="color:#f00">False</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> final[<span style="color:#f60">0</span>][<span style="color:#87ceeb">&#34;summary_text&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Summarize each group of texts</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">def</span> <span style="color:#ff0">summarize_grouped_dict</span>(grouped, sample_size=<span style="color:#f60">20</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">for</span> label, texts in tqdm(grouped.items(), desc=<span style="color:#87ceeb">&#34;Summarizing groups&#34;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> not texts:
+</span></span><span style="display:flex;"><span>            <span style="color:#f00">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        sampled = random.sample(texts, min(sample_size, len(texts)))
+</span></span><span style="display:flex;"><span>        combined_text = <span style="color:#87ceeb">&#34; &#34;</span>.join(sampled)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        summary = summarize_text_safe(
+</span></span><span style="display:flex;"><span>            combined_text,
+</span></span><span style="display:flex;"><span>            tokenizer,
+</span></span><span style="display:flex;"><span>            summarizer
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#87ceeb">f</span><span style="color:#87ceeb">&#34;</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">=== Group: </span><span style="color:#87ceeb">{</span>label<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> (sampled </span><span style="color:#87ceeb">{</span>len(sampled)<span style="color:#87ceeb">}</span><span style="color:#87ceeb"> texts) ===&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(summary)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># --- create groups then summarize each group ---</span>
+</span></span><span style="display:flex;"><span>grouped = group_by_labels(about, labels)
+</span></span><span style="display:flex;"><span>summarize_grouped_dict(grouped)
+</span></span></code></pre></div>
+  </div>
+</details>
+<h3 id="skills">Skills</h3>
+<p>Here&rsquo;s the top 30 mentioned skills ranked &amp; labeled with their respective number of mentions. There&rsquo;re a couple noise in there (&ldquo;We&rdquo;, &ldquo;You&rdquo;) but the most demanded skills are expected like &ldquo;Python&rdquo;, &ldquo;CI/CD&rdquo; and &ldquo;AWS&rdquo;. Some more niche skills are interesting to see as well, for example, &ldquo;API&rdquo;, &ldquo;Git&rdquo;, &ldquo;NoSQL&rdquo;, &ldquo;Linux&rdquo; and &ldquo;GCP&rdquo;.</p>
+<p><img src="/images/skills.png" alt="skills"></p>
+<h2 id="key-phrases-of-responsibility-and-requirements-sections">Key Phrases of Responsibility and Requirements Sections</h2>
+<details>
+  <summary>Code Block: Clustering and Visualization</summary>
+  <div style="margin-top: 10px;">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#0f0"># Get all key phrases</span>
+</span></span><span style="display:flex;"><span>key_phrases_exp = []
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> d in data:
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> len(d[<span style="color:#87ceeb">&#34;key_phrases_exp&#34;</span>]) != <span style="color:#f60">0</span>:
+</span></span><span style="display:flex;"><span>        key_phrases_exp.extend(d[<span style="color:#87ceeb">&#34;key_phrases_exp&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Get embeddings</span>
+</span></span><span style="display:flex;"><span>embeddings = model.encode(key_phrases_exp, normalize_embeddings=<span style="color:#f00">True</span>)
+</span></span><span style="display:flex;"><span>n_clusters = <span style="color:#f60">7</span>  <span style="color:#0f0"># adjust as needed</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Clustering</span>
+</span></span><span style="display:flex;"><span>kmeans = KMeans(n_clusters=n_clusters, random_state=<span style="color:#f60">42</span>)
+</span></span><span style="display:flex;"><span>labels = kmeans.fit_predict(embeddings)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Reducing dimensionality of embeddings</span>
+</span></span><span style="display:flex;"><span>tsne = TSNE(
+</span></span><span style="display:flex;"><span>    n_components=<span style="color:#f60">3</span>,
+</span></span><span style="display:flex;"><span>    perplexity=min(<span style="color:#f60">5</span>, len(embeddings) - <span style="color:#f60">1</span>),
+</span></span><span style="display:flex;"><span>    random_state=<span style="color:#f60">42</span>,
+</span></span><span style="display:flex;"><span>    init=<span style="color:#87ceeb">&#34;random&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>embeddings_3d = tsne.fit_transform(embeddings)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Create dataframe to store embeddings, labels and phrases</span>
+</span></span><span style="display:flex;"><span>df = pd.DataFrame({
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;x&#34;</span>: embeddings_3d[:, <span style="color:#f60">0</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;y&#34;</span>: embeddings_3d[:, <span style="color:#f60">1</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;z&#34;</span>: embeddings_3d[:, <span style="color:#f60">2</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;label&#34;</span>: labels,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;phrase&#34;</span>: key_phrases_exp
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MAX_PER_CLUSTER = <span style="color:#f60">200</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>df_sampled = (
+</span></span><span style="display:flex;"><span>    df.groupby(<span style="color:#87ceeb">&#34;label&#34;</span>, group_keys=<span style="color:#f00">False</span>)
+</span></span><span style="display:flex;"><span>      .apply(<span style="color:#f00">lambda</span> g: g.sample(
+</span></span><span style="display:flex;"><span>          n=min(len(g), MAX_PER_CLUSTER),
+</span></span><span style="display:flex;"><span>          random_state=<span style="color:#f60">42</span>
+</span></span><span style="display:flex;"><span>      ))
+</span></span><span style="display:flex;"><span>      .reset_index(drop=<span style="color:#f00">True</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># Visualizing the clusters of key phrases</span>
+</span></span><span style="display:flex;"><span>fig = px.scatter_3d(
+</span></span><span style="display:flex;"><span>    df_sampled,
+</span></span><span style="display:flex;"><span>    x=<span style="color:#87ceeb">&#34;x&#34;</span>,
+</span></span><span style="display:flex;"><span>    y=<span style="color:#87ceeb">&#34;y&#34;</span>,
+</span></span><span style="display:flex;"><span>    z=<span style="color:#87ceeb">&#34;z&#34;</span>,
+</span></span><span style="display:flex;"><span>    color=<span style="color:#87ceeb">&#34;label&#34;</span>,
+</span></span><span style="display:flex;"><span>    hover_data=[<span style="color:#87ceeb">&#34;phrase&#34;</span>],
+</span></span><span style="display:flex;"><span>    title=<span style="color:#87ceeb">&#34;3D Clustering of Key Phrases (Sampled)&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig.update_traces(marker=dict(size=<span style="color:#f60">5</span>))
+</span></span><span style="display:flex;"><span>fig.update_layout(height=<span style="color:#f60">700</span>)
+</span></span><span style="display:flex;"><span>fig.show()
+</span></span><span style="display:flex;"><span>fig.write_html(<span style="color:#87ceeb">&#34;key_phrases_clusters.html&#34;</span>)
+</span></span></code></pre></div>
+  </div>
+</details>
+<p>Looking at this visualization is much more interesting in that the clustering is much clearer. The dark, navy blue data points are phrases that stresses high degree of technicality but doesn&rsquo;t include specific terminologies, like &ldquo;analyze complex technical problems&rdquo; or &ldquo;designing a significant system component&rdquo;. The blue purple data points stress about data like &ldquo;dataset&rdquo; and &ldquo;data center&rdquo;. The pink purple points center around specific technical terms like &ldquo;C#&rdquo;, &ldquo;Scripting language&rdquo; and &ldquo;multi-threading&rdquo;. The purple-ish pink points don&rsquo;t really represent too much meanings, and the orange points are more descriptive like &ldquo;understanding of&rdquo; or &ldquo;learn quickly&rdquo;. The orange yellow points revolves around cloud technologies, and the yellow points are more about the benefits of working in a company, like &ldquo;different perspectives&rdquo; and &ldquo;embrace various identities&rdquo; or more directly &ldquo;work onsite 3 days/week&rdquo;.</p>
+
+<iframe src="/embeds/key_phrases_clusters.html" width="710" height="610"></iframe>
+
+<h3 id="benefits">Benefits</h3>
+<p>Using similar pipeline as above, following is a visualization of benefits word vectors. This one is even simpler: the yellow points represent retirement plan specifics, the orange points represent further education assistance, the pink points represent health insurance specifics, the purple points specify paid time leaves and the dark blues represent everything else.</p>
+
+<iframe src="/embeds/benefits_clusters.html" width="710" height="610"></iframe>
+
+<hr>
+<p>This concludes the last part of the backend engineering job analysis.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

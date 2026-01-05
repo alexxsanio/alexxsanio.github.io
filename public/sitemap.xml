@@ -2,38 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/posts/</loc>
+    <loc>//localhost:1313/posts/2026-01-05-backend-eng-review-part3/</loc>
     <lastmod>2026-01-05T07:00:00+08:00</lastmod>
   </url><url>
-    <loc>/posts/2026-01-05-essay-series/</loc>
+    <loc>//localhost:1313/posts/</loc>
     <lastmod>2026-01-05T07:00:00+08:00</lastmod>
   </url><url>
-    <loc>/posts/2026-01-05-friend-a/</loc>
+    <loc>//localhost:1313/posts/2026-01-05-essay-series/</loc>
     <lastmod>2026-01-05T07:00:00+08:00</lastmod>
   </url><url>
-    <loc>/posts/2026-01-04-new-years/</loc>
+    <loc>//localhost:1313/posts/2026-01-05-friend-a/</loc>
+    <lastmod>2026-01-05T07:00:00+08:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/posts/2026-01-04-new-years/</loc>
     <lastmod>2026-01-04T07:00:00+08:00</lastmod>
   </url><url>
-    <loc>/posts/2025-12-05-backend-eng-review-part2/</loc>
+    <loc>//localhost:1313/posts/2025-12-05-backend-eng-review-part2-copy/</loc>
     <lastmod>2025-12-05T07:00:00+08:00</lastmod>
   </url><url>
-    <loc>/posts/2025-11-25-backend-eng-review/</loc>
+    <loc>//localhost:1313/posts/2025-11-25-backend-eng-review/</loc>
     <lastmod>2025-11-25T07:00:00+08:00</lastmod>
   </url><url>
-    <loc>/posts/too-dramatic/</loc>
+    <loc>//localhost:1313/posts/too-dramatic/</loc>
     <lastmod>2025-11-17T03:33:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/best-quote/</loc>
+    <loc>//localhost:1313/posts/best-quote/</loc>
     <lastmod>2025-11-17T03:01:00+00:00</lastmod>
   </url><url>
-    <loc>/</loc>
+    <loc>//localhost:1313/</loc>
     <lastmod>2022-08-25T21:30:04+08:00</lastmod>
   </url><url>
-    <loc>/posts/2020-07-06-strange-post/</loc>
+    <loc>//localhost:1313/posts/2020-07-06-strange-post/</loc>
     <lastmod>2020-07-06T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>//localhost:1313/categories/</loc>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>//localhost:1313/tags/</loc>
   </url>
 </urlset>
