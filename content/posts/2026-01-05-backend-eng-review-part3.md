@@ -6,7 +6,7 @@ draft: false
 
 ## 📌 Recap
 
-Part. I & II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts about sections, skills keywords, key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing). 
+Part. I & II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts insights from the about sections, skills keywords and key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing). 
 
 ## 🧾 Job Description
 
