@@ -28,3 +28,4 @@ jobs:
         with:
           github_token: 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
           publish_dir: ./public
+          publish_branch: gh-pages
