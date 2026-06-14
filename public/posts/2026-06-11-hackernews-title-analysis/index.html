@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="Intro
+Hacker News is a forum popular within the startup community where people share their opinions and products. I like the venue because it frequently surfaces fun and niche insights about the trends within the community. I encountered this dataset on kaggle and thought it&rsquo;d be interesting to analyze the titles. Unfortunately, this dataset doesn&rsquo;t countain anything about the real post.
+EDA
+df = pd.read_csv(&#34;/kaggle/input/datasets/elvisbui/hacker-news-top-stories-2020-2026/hacker_news_top_stories_2020_2026.csv&#34;)
+df.head()
+
+  
+      
+          id
+          title
+          url
+          domain
+          author
+          score
+          num_comments
+          created_at
+          created_at_i
+          story_type
+          year
+      
+  
+  
+      
+          21927248
+          Rewriting m4vgalib in Rust
+          http://cliffle.com/blog/m4vga-in-rust/
+          cliffle.com
+          zimmerfrei
+          372
+          44
+          2020-01-01 08:38:20&#43;00:00
+          1577867900
+          story
+          2020
+      
+      
+          21927322
+          What Makes a Successful Founder?
+          https://www.basisset.ventures/founder-superpowers
+          basisset.ventures
+          yarapavan
+          109
+          46
+          2020-01-01 09:07:52&#43;00:00
+          1577869672
+          story
+          2020
+      
+      
+          21927427
+          I&rsquo;m not feeling the async pressure
+          https://lucumr.pocoo.org/2020/1/1/async-pressure/
+          lucumr.pocoo.org
+          pauloxnet
+          337
+          100
+          2020-01-01 10:00:04&#43;00:00
+          1577872804
+          story
+          2020
+      
+      
+          21927473
+          Hard deadlines are not user-first
+          http://jatins.gitlab.io/me/why-deadline/
+          jatins.gitlab.io
+          jatins
+          467
+          246
+          2020-01-01 10:22:42&#43;00:00
+          1577874162
+          story
+          2020
+      
+      
+          21927773
+          What Happened in the 2010s
+          https://avc.com/2019/12/what-happened-in-the-2010s/
+          avc.com
+          notlukesky
+          167
+          90
+          2020-01-01 12:26:04&#43;00:00
+          1577881564
+          story
+          2020
+      
+  
+
+We can see that besides the title there&rsquo;re also score, number of comments, created at and other attribute. But here we&rsquo;ll ignore them for now.">  
+
+  <title>
+    
+      Hacker News Title Analysis
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.900100e9dbee2d56c58fac8bb717037cae7e26a9c36c29d2ff587bdd65f0cbbe510b41d81a3bb234919cdfdc7550d786b2fab70c8fc507772d732fe097106d12.css" integrity="sha512-kAEA6dvuLVbFj6yLtxcDfK5&#43;JqnDbCnS/1h73WXwy75RC0HYGjuyNJGc39x1UNeGsvq3DI/FB3ctcy/glxBtEg==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">..</a>
+
+                    <p>
+                        <time datetime="2026-06-11 07:00:00 &#43;0800 &#43;0800">
+                            2026-06-11
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>Hacker News Title Analysis</h1>
+
+    
+
+    <h1 id="intro">Intro</h1>
+<p><a href="https://news.ycombinator.com">Hacker News</a> is a forum popular within the startup community where people share their opinions and products. I like the venue because it frequently surfaces fun and niche insights about the trends within the community. I encountered this dataset on kaggle and thought it&rsquo;d be interesting to analyze the titles. Unfortunately, this dataset doesn&rsquo;t countain anything about the real post.</p>
+<h1 id="eda">EDA</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df = pd.read_csv(<span style="color:#87ceeb">&#34;/kaggle/input/datasets/elvisbui/hacker-news-top-stories-2020-2026/hacker_news_top_stories_2020_2026.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>df.head()
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th style="text-align: right">id</th>
+          <th style="text-align: left">title</th>
+          <th style="text-align: left">url</th>
+          <th style="text-align: left">domain</th>
+          <th style="text-align: left">author</th>
+          <th style="text-align: right">score</th>
+          <th style="text-align: right">num_comments</th>
+          <th style="text-align: left">created_at</th>
+          <th style="text-align: right">created_at_i</th>
+          <th style="text-align: left">story_type</th>
+          <th style="text-align: right">year</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right">21927248</td>
+          <td style="text-align: left">Rewriting m4vgalib in Rust</td>
+          <td style="text-align: left"><a href="http://cliffle.com/blog/m4vga-in-rust/">http://cliffle.com/blog/m4vga-in-rust/</a></td>
+          <td style="text-align: left">cliffle.com</td>
+          <td style="text-align: left">zimmerfrei</td>
+          <td style="text-align: right">372</td>
+          <td style="text-align: right">44</td>
+          <td style="text-align: left">2020-01-01 08:38:20+00:00</td>
+          <td style="text-align: right">1577867900</td>
+          <td style="text-align: left">story</td>
+          <td style="text-align: right">2020</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">21927322</td>
+          <td style="text-align: left">What Makes a Successful Founder?</td>
+          <td style="text-align: left"><a href="https://www.basisset.ventures/founder-superpowers">https://www.basisset.ventures/founder-superpowers</a></td>
+          <td style="text-align: left">basisset.ventures</td>
+          <td style="text-align: left">yarapavan</td>
+          <td style="text-align: right">109</td>
+          <td style="text-align: right">46</td>
+          <td style="text-align: left">2020-01-01 09:07:52+00:00</td>
+          <td style="text-align: right">1577869672</td>
+          <td style="text-align: left">story</td>
+          <td style="text-align: right">2020</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">21927427</td>
+          <td style="text-align: left">I&rsquo;m not feeling the async pressure</td>
+          <td style="text-align: left"><a href="https://lucumr.pocoo.org/2020/1/1/async-pressure/">https://lucumr.pocoo.org/2020/1/1/async-pressure/</a></td>
+          <td style="text-align: left">lucumr.pocoo.org</td>
+          <td style="text-align: left">pauloxnet</td>
+          <td style="text-align: right">337</td>
+          <td style="text-align: right">100</td>
+          <td style="text-align: left">2020-01-01 10:00:04+00:00</td>
+          <td style="text-align: right">1577872804</td>
+          <td style="text-align: left">story</td>
+          <td style="text-align: right">2020</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">21927473</td>
+          <td style="text-align: left">Hard deadlines are not user-first</td>
+          <td style="text-align: left"><a href="http://jatins.gitlab.io/me/why-deadline/">http://jatins.gitlab.io/me/why-deadline/</a></td>
+          <td style="text-align: left">jatins.gitlab.io</td>
+          <td style="text-align: left">jatins</td>
+          <td style="text-align: right">467</td>
+          <td style="text-align: right">246</td>
+          <td style="text-align: left">2020-01-01 10:22:42+00:00</td>
+          <td style="text-align: right">1577874162</td>
+          <td style="text-align: left">story</td>
+          <td style="text-align: right">2020</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">21927773</td>
+          <td style="text-align: left">What Happened in the 2010s</td>
+          <td style="text-align: left"><a href="https://avc.com/2019/12/what-happened-in-the-2010s/">https://avc.com/2019/12/what-happened-in-the-2010s/</a></td>
+          <td style="text-align: left">avc.com</td>
+          <td style="text-align: left">notlukesky</td>
+          <td style="text-align: right">167</td>
+          <td style="text-align: right">90</td>
+          <td style="text-align: left">2020-01-01 12:26:04+00:00</td>
+          <td style="text-align: right">1577881564</td>
+          <td style="text-align: left">story</td>
+          <td style="text-align: right">2020</td>
+      </tr>
+  </tbody>
+</table>
+<p>We can see that besides the title there&rsquo;re also score, number of comments, created at and other attribute. But here we&rsquo;ll ignore them for now.</p>
+<h1></h1>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

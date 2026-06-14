@@ -2,73 +2,94 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on </title>
-    <link>/posts/</link>
+    <link>//localhost:1313/posts/</link>
     <description>Recent content in Posts on </description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 05 Jan 2026 07:00:00 +0800</lastBuildDate>
-    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Jun 2026 07:00:00 +0800</lastBuildDate>
+    <atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hacker News Title Analysis</title>
+      <link>//localhost:1313/posts/2026-06-11-hackernews-title-analysis/</link>
+      <pubDate>Thu, 11 Jun 2026 07:00:00 +0800</pubDate>
+      <guid>//localhost:1313/posts/2026-06-11-hackernews-title-analysis/</guid>
+      <description>&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;id&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;title&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;url&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;domain&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;author&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;score&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;num_comments&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;created_at&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;created_at_i&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;story_type&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;year&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;21927248&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Rewriting m4vgalib in Rust&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;http://cliffle.com/blog/m4vga-in-rust/&#34;&gt;http://cliffle.com/blog/m4vga-in-rust/&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;cliffle.com&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;zimmerfrei&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;372&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;44&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;2020-01-01 08:38:20+00:00&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;1577867900&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;story&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;2020&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;21927322&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;What Makes a Successful Founder?&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://www.basisset.ventures/founder-superpowers&#34;&gt;https://www.basisset.ventures/founder-superpowers&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;basisset.ventures&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;yarapavan&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;109&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;46&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;2020-01-01 09:07:52+00:00&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;1577869672&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;story&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;2020&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;21927427&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;I&amp;rsquo;m not feeling the async pressure&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://lucumr.pocoo.org/2020/1/1/async-pressure/&#34;&gt;https://lucumr.pocoo.org/2020/1/1/async-pressure/&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;lucumr.pocoo.org&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;pauloxnet&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;337&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;100&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;2020-01-01 10:00:04+00:00&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;1577872804&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;story&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;2020&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;21927473&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Hard deadlines are not user-first&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;http://jatins.gitlab.io/me/why-deadline/&#34;&gt;http://jatins.gitlab.io/me/why-deadline/&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;jatins.gitlab.io&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;jatins&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;467&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;246&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;2020-01-01 10:22:42+00:00&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;1577874162&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;story&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;2020&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;21927773&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;What Happened in the 2010s&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://avc.com/2019/12/what-happened-in-the-2010s/&#34;&gt;https://avc.com/2019/12/what-happened-in-the-2010s/&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;avc.com&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;notlukesky&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;167&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;90&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;2020-01-01 12:26:04+00:00&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;1577881564&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;story&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;2020&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
+    </item>
+    <item>
+      <title>Girl, you always start with friends</title>
+      <link>//localhost:1313/posts/2025-05-18-girl-you-always-start-with-friends/</link>
+      <pubDate>Mon, 18 May 2026 07:00:00 +0800</pubDate>
+      <guid>//localhost:1313/posts/2025-05-18-girl-you-always-start-with-friends/</guid>
+      <description>&lt;p&gt;Girls take on a lot in life, especially those who&amp;rsquo;s given high expectations either from their parents or from themselves. 我是中国来的孩子，I&amp;rsquo;m from China so it happens a lot that we&amp;rsquo;re given really high pressure from our parents. I think the first step to &amp;ldquo;make this better&amp;rdquo; is to have friends who &amp;ldquo;slow you down&amp;rdquo;. Personally for me, fortunately, I was not impressed with only making friends with Asians when I first got into college. As a person originally not from the USA, I was not socially responsible to bind myself with hanging out with Asians. Many people who&amp;rsquo;re originally from China likes to only, I meant only hang out with people originally from China and not bounded by ethnicities. I think that&amp;rsquo;s alright now, but before I actually viewed this as a form of &amp;ldquo;xenophobia&amp;rdquo; from the Chinese people&amp;rsquo;s side. I mean it doesn&amp;rsquo;t sound cool back then, but what I did was hanging out with a lot of American friends on top of my mandantory hangout with Chinese people. Eventually I met a group of white people who now I&amp;rsquo;ll call them affectionately &amp;ldquo;my smoker friends&amp;rdquo; who sort of just was with me till now.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About eating</title>
+      <link>//localhost:1313/posts/2026-05-11-about-eating/</link>
+      <pubDate>Mon, 11 May 2026 07:00:00 +0800</pubDate>
+      <guid>//localhost:1313/posts/2026-05-11-about-eating/</guid>
+      <description>&lt;p&gt;I personally think eating can reflect a lot about a person. First let&amp;rsquo;s talk about if a person likes eating or not. If she likes eating, then chances are they don&amp;rsquo;t mind things that much. There&amp;rsquo;re people who likes eating, foodies, and there&amp;rsquo;re people who can&amp;rsquo;t eat that much. I love people who can&amp;rsquo;t eat that much. They probably love ordering lattes, which further make them not want to eat. They probably have sentimental issues, either don&amp;rsquo;t eat a lot throughout the day or order enough and survive on that throughout. I&amp;rsquo;ll share one secret: if you&amp;rsquo;ve touched drugs, chances are you like eating especially every time after you touched it, like hot dogs. There&amp;rsquo;s probably some science behind it, but I don&amp;rsquo;t really know.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Todo: Job Search</title>
+      <link>//localhost:1313/posts/2025-05-11-todo-job-search/</link>
+      <pubDate>Mon, 11 May 2026 07:00:00 +0800</pubDate>
+      <guid>//localhost:1313/posts/2025-05-11-todo-job-search/</guid>
+      <description>&lt;p&gt;My software engineering job search components:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;reading about data structure &amp;amp; algorithms&lt;/li&gt;&#xA;&lt;li&gt;practice algorithm questions (&lt;a href=&#34;https://www.techinterviewhandbook.org/grind75/?difficulty=Medium&amp;amp;difficulty=Hard&amp;amp;order=all_rounded&amp;amp;grouping=weeks&#34;&gt;grind 75; my settings&lt;/a&gt;)&lt;/li&gt;&#xA;&lt;li&gt;read &lt;a href=&#34;https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF/ref=sr_1_4?crid=3DABW7BV2V6B7&amp;amp;dib=eyJ2IjoiMSJ9.vB8dMUpzM0-gK_atwbVVgb-U3GucfpMi3eFrcKD82SVHLzAKRCVG2pGa1TsyrNJnwHoOHyKPp8vNti37cJxyju3sZWWe8YqPE4-2-fOJ4le9SSsqBs6AfofRJYehbWBROaeD8-ml-Lf9k2Y6779wGgQTq92PlSBm52t1_cUmuuVBzRjva7CMYxeZetE2qoAbn893IWRiBCSEaEiiDOdatNS4cS4zH9Zbk3_5VIbFoy0.ee1nrC9BB83X82fRMZnBCAzUOh7cN6xLiSYkSNJeh24&amp;amp;dib_tag=se&amp;amp;keywords=system+design+interview&amp;amp;qid=1778505821&amp;amp;sprefix=system+design+intervi%2Caps%2C267&amp;amp;sr=8-4&#34;&gt;system design interview&lt;/a&gt; and watch &lt;a href=&#34;https://www.youtube.com/@hello_interview&#34;&gt;this&lt;/a&gt; youtube station&amp;rsquo;s videos&lt;/li&gt;&#xA;&lt;li&gt;build side projects&lt;/li&gt;&#xA;&lt;li&gt;continue reading technical textbooks (&lt;a href=&#34;https://www.goodreads.com/book/show/216848047-ai-engineering&#34;&gt;AI Engineering&lt;/a&gt;)&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
     <item>
       <title>📝 A Review Of Backend Engineer Jobs, Part. III</title>
-      <link>/posts/2026-01-05-backend-eng-review-part3/</link>
+      <link>//localhost:1313/posts/2026-01-05-backend-eng-review-part3/</link>
       <pubDate>Mon, 05 Jan 2026 07:00:00 +0800</pubDate>
-      <guid>/posts/2026-01-05-backend-eng-review-part3/</guid>
+      <guid>//localhost:1313/posts/2026-01-05-backend-eng-review-part3/</guid>
       <description>&lt;h2 id=&#34;-recap&#34;&gt;📌 Recap&lt;/h2&gt;&#xA;&lt;p&gt;Part. I &amp;amp; II of this analysis series covered EDA, salary, levels, companies and remote or not of the backend engineering job market. This part of the analysis extracts insights from the about sections, skills keywords and key phrases of required experiences and benefits of the job posting dataset using text analysis (natural language processing).&lt;/p&gt;&#xA;&lt;h2 id=&#34;-job-description&#34;&gt;🧾 Job Description&lt;/h2&gt;&#xA;&lt;p&gt;Each job description would have an about section, a skill section, a responsibility section and a benefit section. We write a suite of functions to heuristically extract these sections and key words and phrases. In the end, we build a dictionary of info from each job description.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Two essay series this year</title>
-      <link>/posts/2026-01-05-essay-series/</link>
-      <pubDate>Mon, 05 Jan 2026 07:00:00 +0800</pubDate>
-      <guid>/posts/2026-01-05-essay-series/</guid>
-      <description>&lt;p&gt;In continuing to have something to write about, I came up with two (self-claimed) brilliant ideas of essay series. The first one is I&amp;rsquo;m going to randomly pick essay prompts from GRE tests and answer them as truthfully as possible, which probably won&amp;rsquo;t be what&amp;rsquo;s usually expected in these kind of essays. Secondly, I&amp;rsquo;m going to randomly pick regular essay prompts to write serious short essay about, the point is even regular topics can be interesting and maybe even deep.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>友人A</title>
-      <link>/posts/2026-01-05-friend-a/</link>
+      <link>//localhost:1313/posts/2026-01-05-friend-a/</link>
       <pubDate>Mon, 05 Jan 2026 07:00:00 +0800</pubDate>
-      <guid>/posts/2026-01-05-friend-a/</guid>
+      <guid>//localhost:1313/posts/2026-01-05-friend-a/</guid>
       <description>&lt;iframe&#xA;  src=&#34;https://open.spotify.com/embed/track/0EjJODssbRN1jVm29M0o1e?utm_source=generator&#34;&#xA;  width=&#34;100%&#34;&#xA;  height=&#34;352&#34;&#xA;  frameborder=&#34;0&#34;&#xA;  loading=&#34;lazy&#34;&#xA;  allowfullscreen&gt;&#xA;&lt;/iframe&gt;&#xA;&lt;p&gt;从八月份也过去了这么久了，我就细数一下我遇到过的那些值得一提的人吧。其实这些人我也没有特别深交，只是在生活中有偶尔遇到。今天我们来说一说这个人我昵称他为“友人A&amp;quot;。&lt;/p&gt;&#xA;&lt;p&gt;我遇到他的时候是八月份刚从纽约回到博多的那个时间。当时刚回来，出院之后去当地网吧玩游戏，当时网吧正有个电竞活动，我social完了之后感觉十分horny于是打车去了博多当地一家酒吧喝酒，结果因为是劳动节周一一个人都没有。于是我就开始无聊的打台球。&lt;/p&gt;&#xA;&lt;p&gt;当时有两三组男人也在打台球，一开始本身还是对一组长得漂亮的男孩子感兴趣，结果有另一对男的，一个稍矮的拉美人，一个高高大大的白人硬说要一起玩一局，于是我觉得也可以就跟着玩了。结果这个引到那个就跟那个高高大大的男的一起回家了！总之我对那个人印象还不错，感觉有种可可爱爱有点怯怯的感觉，很迷人。后来累的半死发现人家完全还没有尽力，有种真的很弱鸡的感觉。&lt;/p&gt;&#xA;&lt;p&gt;后来印象比较深刻的就是搬家的时候自己一个人搬两个人的家累的半死，又只有一天半的时间可以搬，只听见外面有人偶尔的按喇叭。好像看到他去倒垃圾。最后这段关系也就是在聊天中截止了。当然一个小城里肯定互相见到的几率还是有的，也偶遇过两三次，但是也都没多说话。大概缘分就止于此了。&lt;/p&gt;&#xA;&lt;p&gt;好啦，下次再换个人聊，说不定可以聊聊某个我在纽约遇到的神人。&lt;/p&gt;</description>
     </item>
     <item>
       <title>New Years 2026</title>
-      <link>/posts/2026-01-04-new-years/</link>
+      <link>//localhost:1313/posts/2026-01-04-new-years/</link>
       <pubDate>Sun, 04 Jan 2026 07:00:00 +0800</pubDate>
-      <guid>/posts/2026-01-04-new-years/</guid>
+      <guid>//localhost:1313/posts/2026-01-04-new-years/</guid>
       <description>&lt;p&gt;写这篇年总结的时候在听ODNOGO ULTRA FUNK - SLOWED&lt;/p&gt;&#xA;&lt;iframe&#xA;  src=&#34;https://open.spotify.com/embed/track/6JMJIZ9mrGGdqpv7i2iwAx?utm_source=generator&#34;&#xA;  width=&#34;100%&#34;&#xA;  height=&#34;352&#34;&#xA;  frameborder=&#34;0&#34;&#xA;  loading=&#34;lazy&#34;&#xA;  allowfullscreen&gt;&#xA;&lt;/iframe&gt;&#xA;&lt;p&gt;今年后半年一直沉迷这个风格的歌，每天出门戴个耳机就放这类音乐做背景音乐，时常感觉旁若无人仿佛天地之间只有自己的感觉是有关系的主人公感爆棚。The feminine urge to study Russian and Slavic-family of language.&lt;/p&gt;&#xA;&lt;p&gt;今年改变最大的一点大概是五月份决定离婚之后放飞自我啪了一群人，一般比我年龄大的帅哥。在纽约浪了一个夏天之后也是吃饱喝足见了世面，现在见到谁都不会有特别大的波澜，甚至有些普通情况下会让女生感觉不适的情况我也不会有太大感觉，比如约会好几次还不拉手也不接触什么的。感觉虽然和很多人都发生了不一样种类的关系，但是每次也都是很认真的照顾着对方的感情，互相也都内心比较舒服（当然我最后总是拒绝对方肯定还是不那么开心的，但是这我觉得不算我的问题）。我觉得我尽情分了。也见过不少各形各色的人，虽然个人感觉有特色的人见的比较多。&lt;/p&gt;&#xA;&lt;p&gt;一个人真的过的很开心，有种原地起飞的感觉，想去哪抬脚就去了，每天想什么时候起床什么时候起床，想什么时候睡觉什么时候睡觉，也有大把大把的时间做自己想做的事情。夏季结束的时候遇到了一个不太好的人，后来让这件事过去花了很大时间精力，但是后来发现跟以前的一些经历也有联系，整个过程也学到了很多，感觉不仅在遇人方面经验丰富很多，而且在做决定和领导方面也成熟了很多，比以前少了很多小孩子气，也稳重了很多。看人看江湖敏锐很多，社会化很多，没有以前那么天真，平静稳重很多，以前是表面上很容易急躁跳脱的。对自己情绪控制也好一些，但是这方面2026年还是希望继续发展，比如把自己公寓打理更好一些，更干净整洁一些，自己做饭多一些不要老是在外面吃饭花钱，理财，然后尽量不要出去玩，更内敛在家或者咖啡馆呆的更多一点，做一些内寻的事情，比如学习外语或者技能，或者读一些自己感兴趣很久的书，多花时间在家跟自己相处。同时希望能再找到一段稳定的专注于陪伴的感情。感觉自己一个人有的时候还是会孤独的，虽然仍然不愿意将就。&lt;/p&gt;&#xA;&lt;p&gt;今年发现其实真的有很多人会喜欢我。但是把控每一段人际关系的距离感和进展自我感觉还是一个很大的课题，需要持续的纪律和练习。虽然自己能很沉迷于自己的生活，但是有些时候还是把控不太好。要不就自己一个人过很久，要不就很粘一个人。感觉还是需要更多问问自己想要什么。&lt;/p&gt;&#xA;&lt;p&gt;最后就是希望还在科州生活的这段时间可以多多享受自然，出门户外运动。更多去道场学武功，更多去gym训练基础，过一个有成果的人生（虽然不一定一定要赚很多很多钱）。希望能好好努力，一步一步脚踏实地做好一些事情。许愿(*¯︶¯*)&lt;/p&gt;&#xA;&lt;p&gt;路还是自己一步步走出来的。我可以做到！&lt;/p&gt;</description>
     </item>
     <item>
       <title>📝 A Review Of Backend Engineer Jobs, Part. II</title>
-      <link>/posts/2025-12-05-backend-eng-review-part2-copy/</link>
+      <link>//localhost:1313/posts/2025-12-05-backend-eng-review-part2-copy/</link>
       <pubDate>Fri, 05 Dec 2025 07:00:00 +0800</pubDate>
-      <guid>/posts/2025-12-05-backend-eng-review-part2-copy/</guid>
+      <guid>//localhost:1313/posts/2025-12-05-backend-eng-review-part2-copy/</guid>
       <description>&lt;h2 id=&#34;-recap&#34;&gt;📌 Recap&lt;/h2&gt;&#xA;&lt;p&gt;In Part. I, I introduced why I decided to do this analysis, performed exploratory data analysis (EDA) and an analysis of median salary ranges. As a reminder, the motivation for the analysis is backend engineering is a good entry-level job for people who wants to break into the tech industry. EDA revealed that there’re a lot of backend engineering jobs in big cities like Baltimore, Washington D.C. and Chicago. Salary analysis showed that cities like Detroit, Milwaukee, Indianapolis, Birmingham and Salt Lake City have really low salary range.&lt;/p&gt;</description>
     </item>
     <item>
       <title>📝 A Review Of Backend Engineer Jobs, Part. I</title>
-      <link>/posts/2025-11-25-backend-eng-review/</link>
+      <link>//localhost:1313/posts/2025-11-25-backend-eng-review/</link>
       <pubDate>Tue, 25 Nov 2025 07:00:00 +0800</pubDate>
-      <guid>/posts/2025-11-25-backend-eng-review/</guid>
+      <guid>//localhost:1313/posts/2025-11-25-backend-eng-review/</guid>
       <description>&lt;h2 id=&#34;why-a-review-of-backend-engineering&#34;&gt;Why a review of backend engineering?&lt;/h2&gt;&#xA;&lt;p&gt;Like many people, I&amp;rsquo;m trying to break into the AI / software industry. This is really tough in general because entry-level jobs in the field has decreased by 10% in the past couple years while mid to senior level jobs still steadily increased (&lt;a href=&#34;https://www.youtube.com/watch?v=VbB9irtpoDc&#34;&gt;Is Data Science Dying? - Marina Wyss - AI &amp;amp; Machine Learning&lt;/a&gt;). Jobs like ML or AI engineer especially would require many years of experience. From stories I&amp;rsquo;ve heard, it seems like either you get an internship which would lead to a full-time job, or you get an ML-adjacent job and transfer to an ML job in the same company.&lt;/p&gt;</description>
     </item>
     <item>
       <title>too dramatic</title>
-      <link>/posts/too-dramatic/</link>
+      <link>//localhost:1313/posts/too-dramatic/</link>
       <pubDate>Mon, 17 Nov 2025 03:33:00 +0000</pubDate>
-      <guid>/posts/too-dramatic/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/images/too-dramatic.png&#34; alt=&#34;too-dramatic&#34;&gt;&lt;/p&gt;</description>
+      <guid>//localhost:1313/posts/too-dramatic/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;//localhost:1313/images/too-dramatic.png&#34; alt=&#34;too-dramatic&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>best quotes of from my favorite BL novel (updating ✨)</title>
-      <link>/posts/best-quote/</link>
+      <link>//localhost:1313/posts/best-quote/</link>
       <pubDate>Mon, 17 Nov 2025 03:01:00 +0000</pubDate>
-      <guid>/posts/best-quote/</guid>
+      <guid>//localhost:1313/posts/best-quote/</guid>
       <description>&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;&amp;rdquo; said Feng Xin.&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;&amp;rdquo; said Mu Qing.&lt;br&gt;&#xA;&amp;ldquo;&amp;hellip;?&amp;rdquo; said Quan Yizhen.&lt;br&gt;&#xA;&amp;ldquo;Ho ho,&amp;rdquo; said Pei Ming.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;&#xA;&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“Xie Lian didn&amp;rsquo;t know whether to laugh or cry.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;&#xA;&lt;p&gt;/&lt;/p&gt;&#xA;&lt;p&gt;“If I like you, you could be a beggar and I&amp;rsquo;d still like you. If I dislike you, you could be the emperor and I&amp;rsquo;d still dislike you. Shouldn&amp;rsquo;t it be like that? It&amp;rsquo;s simple logic, so whether you&amp;rsquo;re human or not is irrelevant.”&lt;br&gt;&#xA;― Mò Xiāng Tóng Xiù, Heaven Official&amp;rsquo;s Blessing: Tian Guan Ci Fu (Novel), Vol. 1&lt;/p&gt;</description>
     </item>
     <item>
       <title>strange post with custom js</title>
-      <link>/posts/2020-07-06-strange-post/</link>
+      <link>//localhost:1313/posts/2020-07-06-strange-post/</link>
       <pubDate>Mon, 06 Jul 2020 00:00:00 +0800</pubDate>
-      <guid>/posts/2020-07-06-strange-post/</guid>
+      <guid>//localhost:1313/posts/2020-07-06-strange-post/</guid>
       <description>&lt;p&gt;This post is strange. It also has some custom js.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/hanwenguo/hugo-theme-nostyleplease&#34;&gt;Masellum Author Of The Template&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
