@@ -1,0 +1,30 @@
+name: Deploy Hugo site
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: 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
+          publish_dir: ./public
